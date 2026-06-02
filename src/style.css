@@ -1,296 +1,548 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  margin: 0;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
-}
-
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
-
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-}
-
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
-}
-
-#app {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-#center {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
-}
-
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
+    background-color: #111111; 
+    color: #ffffff;
+    font-family: 'Metal Mania', 'Luminari', 'Papyrus', 'Fantasy', serif; 
+    overscroll-behavior-y: none; 
+    -webkit-user-select: none; 
+    user-select: none;
+    
+    /* Strict Viewport Locking & Centering */
+    height: 100vh; /* Fallback for older browsers */
+    height: 100dvh; /* FIX 1: Accounts for mobile browser address bars! */
+    overflow: hidden; 
     display: flex;
-    padding: 6px 12px;
     align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
     justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
+/* --- Device Wrapper (New Desktop Constraints) --- */
+.device-wrapper {
+    position: relative; /* Allows absolute positioning for modal to stay inside bounds */
+    width: 100vw;
+    height: 100vh; /* Fallback */
+    height: 100dvh; /* FIX 1 */
+    background-color: #050505;
+    display: flex;
+    flex-direction: column;
+    container-type: size; 
 }
 
-.ticks {
-  position: relative;
-  width: 100%;
+/* Desktop Media Query */
+@media (min-width: 768px) {
+    .device-wrapper {
+        height: 75vh;
+        height: 75dvh;
+        width: calc(75vh * (9 / 16)); 
+        border-radius: 20px; 
+        box-shadow: 0 0 50px rgba(0,0,0,0.8); 
+        overflow: hidden;
+    }
+}
 
-  &::before,
-  &::after {
-    content: '';
+.app-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 10px; 
+    height: 85cqh; 
+    max-height: 85cqh; /* FIX 2: Strict limit to prevent blowout */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* --- Header --- */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 6cqh;
+    border-bottom: 1px solid #222;
+}
+
+.app-header h1 {
+    font-size: 3cqh;
+    letter-spacing: 2px;
+    /* REMOVED: text-transform: uppercase to allow Title Case formatting */
+    font-weight: normal;
+}
+.header-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+
+.btn-header {
+    background-color: #3b3b4f;
+    color: white;
+    border: none;
+    padding: 0.5cqh 2cqw;
+    font-family: inherit;
+    font-size: 2cqh;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* --- Main Layout: Two Independent Columns --- */
+.tracker-board {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); 
+    gap: 15px;
+    height: 79cqh;
+    padding: 1cqh 0;
+    width: 100%; 
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    min-width: 0; 
+    min-height: 0; /* FIX 3: Allows flex items to shrink below minimum content size */
+    width: 100%;
+}
+
+/* --- Typography --- */
+.stat-title {
+    text-align: center;
+    font-size: 2cqh;
+    letter-spacing: 1px;
+    margin-bottom: 0.5cqh;
+    /* REMOVED: text-transform: uppercase to allow Title Case formatting */
+    font-weight: normal;
+    line-height: 1; /* FIX 4: Prevents invisible font metrics from pushing height */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    max-width: 100%; 
+}
+
+.current-value {
+    font-size: 5cqh;
+    font-weight: normal;
+    line-height: 1;
+}
+
+/* --- Buttons --- */
+button {
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: inherit;
+    touch-action: manipulation; 
+}
+
+button:active {
+    transform: scale(0.95); 
+    filter: brightness(1.2);
+}
+
+.btn-minus { background-color: #3a1c1a; } 
+.btn-plus { background-color: #264023; }  
+
+/* --- Unified Component: Trackers --- */
+.tracker {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1; 
+    min-width: 0; 
+    min-height: 0; /* FIX 3 */
+    width: 100%;
+}
+
+.tracker-controls {
+    display: flex;
+    width: 100%;
+}
+
+.tracker-values {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.max-value {
+    font-size: 1.5cqh;
+    margin-bottom: 0.5cqh;
+}
+
+/* --- Modifier: Major Tracker (Left Side) --- */
+.tracker--major {
+    flex: 1.2; /* Increased flex weight from 1 to give major trackers more height budget */
+    min-height: 0;
+}
+
+.tracker--major .stat-title {
+    font-size: 3cqh; 
+}
+
+.tracker--major .tracker-controls {
+    justify-content: space-between;
+    align-items: stretch;
+    height: 11cqh; /* Increased height from 9cqh to absorb vertical space and provide larger tap targets */
+    width: 92%; 
+    margin: 0 auto;
+}
+
+.tracker--major .btn-stat {
+    height: 100%; 
+    width: 25%; 
+    max-width: 70px;
+    font-size: 5ch;
+    border-radius: 2px;
+}
+
+.tracker--major .current-value {
+    font-size: 8cqh;
+}
+
+/* --- Modifier: Minor Tracker (Right Side) --- */
+.tracker--minor {
+    margin-bottom: 0.5cqh;
+}
+
+.tracker--minor .tracker-controls {
+    justify-content: center;
+    align-items: center;
+    gap: 4cqw; 
+    height: 6cqh; /* Increased height from 5cqh to provide larger tap targets and better balance with major trackers */
+}
+
+.tracker--minor .btn-stat {
+    height: 5cqh;
+    aspect-ratio: 1 / 1;
+    font-size: 3.5cqh;
+    border-radius: 2px;
+}
+
+.tracker--minor .current-value { 
+    font-size: 5cqh;
+    text-align: center;
+}
+
+/* --- Component: XP Tracker (Bottom Left) --- */
+.xp-tracker {
+    flex: 0.8; /* Reduced flex weight from 1.2 to compress XP card vertically and eliminate gaps */
+    width: 92%; /* Aligns perfectly with Major trackers */
+    margin: 0 auto;
+}
+
+.xp-current {
+    font-size: 5cqh;
+    font-weight: normal;
+    margin-bottom: 0.5cqh;
+    line-height: 1;
+}
+
+.xp-controls {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    justify-content: center;
+}
+
+.xp-controls button {
+    font-size: 1.8cqh;
+    padding: 0.6cqh 0; /* Tightened padding slightly to fit the new snug wrapper perfectly */
+    border-radius: 2px;
+    flex: 1; 
+}
+
+/* --- Left Column Tracker Layout Wrapper --- */
+#left-trackers {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    padding-bottom: 0; /* REMOVED: Left side no longer needs spacing buffer */
+}
+
+/* --- Right Column Tracker Layout Wrapper --- */
+#right-trackers {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    padding-bottom: 6cqh; /* ADDED: Spacing reserve for collapsed flyout in right column */
+}
+
+/* --- Component: Dynamic Bottom-Sheet Flyout (Right Bottom) --- */
+.conditions-flyout {
     position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
-  }
-
-  &::before {
+    bottom: 0;
     left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
-  }
+    width: 100%;
+    background-color: #1a1a1a;
+    border: 1px solid #222222;
+    border-top: 3px solid #e0e0e0; /* Switch blue bar to a very light grey */
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    overflow: hidden;
+    
+    /* DYNAMIC HEIGHT SYSTEM: Let content size dictate natural height, but limit via max-height */
+    height: auto; 
+    max-height: 6cqh; 
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease; /* Elegant sliding reveal */
+}
+
+.conditions-flyout.collapsed {
+    max-height: 6cqh; /* Limits container strictly to header height when collapsed */
+}
+
+.conditions-flyout.expanded {
+    max-height: 100%; /* Allows sheet to organically expand to content size, capping at full height */
+    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.85);
+}
+
+/* ADDED: Dynamic Conditional Styling when active conditions exist */
+.conditions-flyout.has-active-conditions {
+    border-top-color: #d63031; /* Vibrant dark-fantasy red */
+}
+
+.flyout-header {
+    height: 6cqh;
+    min-height: 35px;
+    background-color: #0d0d0d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4cqw;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid #222222;
+    flex-shrink: 0;
+}
+
+.flyout-header:active {
+    background-color: #151515;
+}
+
+.flyout-title {
+    font-size: 2.2cqh;
+    letter-spacing: 1px;
+    /* REMOVED: text-transform: uppercase to allow Title Case formatting */
+    font-weight: normal;
+    transition: color 0.3s ease;
+}
+
+.conditions-flyout.has-active-conditions .flyout-title {
+    color: #d63031; /* Vibrant dark-fantasy red */
+}
+
+.flyout-arrow {
+    font-size: 1.8cqh;
+    color: #e0e0e0; /* Switch arrow to very light grey */
+    transition: color 0.3s ease;
+}
+
+.conditions-flyout.has-active-conditions .flyout-arrow {
+    color: #d63031; /* Vibrant dark-fantasy red */
+}
+
+.flyout-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Lock scroll area within */
+    padding: 1cqh 0;
+    
+    /* Transition opacity of layout content alongside sliding movement */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease-out, visibility 0.15s;
+}
+
+/* Fade contents back in smoothly once slide starts */
+.conditions-flyout.expanded .flyout-content {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.2s ease-in 0.08s, visibility 0.2s;
+}
+
+.condition-select-container {
+    width: 92%;
+    margin: 1cqh auto 0 auto;
+    flex-shrink: 0;
+}
+
+.condition-select {
+    width: 100%;
+    background-color: #242424;
+    color: #e0e0e0; /* Switch text color inside select field to very light grey */
+    border: 1px dashed #3a3a3a;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 2cqh;
+    padding: 0.8cqh;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+.condition-select:focus {
+    border-color: #e0e0e0; /* Switch focus indicator to very light grey */
+}
+
+.condition-select option {
+    background-color: #141414;
+    color: white;
+    font-family: sans-serif; /* High readability dropdown items */
+}
+
+/* --- Advertisement Placeholder --- */
+.ad-container {
+    width: 100%;
+    height: 15cqh;
+    max-height: 15cqh;
+    display: flex;
+    flex-direction: column;
+}
+
+#ad-disclaimer {
+    font-size: 0.8cqh;
+    line-height: 1.2cqh;
+    text-align: center;
+    padding: 0.3cqh 0;
+    color: #999999;
+    flex-shrink: 0;
+}
+
+a#ad-disclaimer,
+a#ad-disclaimer:visited,
+a#ad-disclaimer:link {
+    color: #999999 !important;
+    -webkit-text-fill-color: #999999 !important;
+}
+
+.ad-placeholder {
+    width: 100%;
+    flex: 1;
+    background-color: #3b3b3b; 
+    color: #999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2cqh;
+    letter-spacing: 1px;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+/* --- Edit Modal Popup --- */
+.modal-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: #2b2b2b; /* Dark grey matching screenshot */
+    width: 85%;
+    max-width: 450px;
+    max-height: 90%;
+    overflow-y: auto;
+    /* REMOVED: border-top has been eliminated for a completely clean, seamless dark look */
+    border-top: none; 
+    padding: 2cqh 5cqw;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.modal-section-title {
+    text-align: center;
+    color: #a2add0; /* Soft purplish-blue */
+    font-size: 2.5cqh;
+    margin-top: 1.5cqh;
+    margin-bottom: 1.5cqh;
+    letter-spacing: 1px;
+    font-weight: normal;
+}
+
+.modal-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Strict 50/50 Grid Split */
+    gap: 10px;
+    margin-bottom: 1cqh;
+    align-items: center;
+}
+
+.modal-label {
+    text-align: right;
+    font-size: 2.2cqh;
+}
+
+/* Specialized input styles */
+.modal-input-val {
+    width: 100%; /* Forces input to fill its half of the grid */
+    color: black;
+    background-color: white;
+    font-family: sans-serif;
+    padding: 0 5px;
+    height: 3.5cqh;
+    min-height: 30px;
+    font-size: 2cqh;
+    border: none;
+    border-radius: 2px;
+}
+
+.modal-input-name {
+    width: 100%; /* Forces input to fill its half of the grid */
+    text-align: right; /* Aligns left-column input text to match labels */
+    color: black;
+    background-color: white;
+    font-family: sans-serif;
+    padding: 0 8px;
+    height: 3.5cqh;
+    min-height: 30px;
+    font-size: 2cqh;
+    border: none;
+    border-radius: 2px;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 3cqh;
+    margin-bottom: 1cqh;
+}
+
+.modal-btn {
+    flex: 1;
+    padding: 1.5cqh 0;
+    background-color: #555555;
+    color: white;
+    font-size: 2.2cqh;
+    border-radius: 2px;
+}
+
+.modal-btn:active {
+    background-color: #777777;
 }
