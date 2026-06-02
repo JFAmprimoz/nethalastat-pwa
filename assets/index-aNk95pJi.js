@@ -1,0 +1,41 @@
+(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin===`use-credentials`?t.credentials=`include`:e.crossOrigin===`anonymous`?t.credentials=`omit`:t.credentials=`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();function e(e){return typeof e==`string`?e.replace(/[&<>"']/g,e=>({"&":`&amp;`,"<":`&lt;`,">":`&gt;`,'"':`&quot;`,"'":`&#x27;`})[e]):e}function t(t,n,r){let i=e(t.name);return`
+        <div class="tracker ${r?`tracker--major`:`tracker--minor`}">
+            <h2 class="stat-title">${i}</h2>
+            <div class="tracker-controls">
+                <button class="btn-minus btn-stat" data-target="${n}" data-id="${t.id}" data-amount="-1">-</button>
+                <div class="tracker-values">
+                    ${t.max===void 0?``:`<span class="max-value">Max: ${t.max}</span>`}
+                    <span class="current-value">${t.current}</span>
+                </div>
+                <button class="btn-plus btn-stat" data-target="${n}" data-id="${t.id}" data-amount="1">+</button>
+            </div>
+        </div>
+    `}function n(e,t){try{localStorage.setItem(e,JSON.stringify(t))}catch(e){console.error(`Error saving to localStorage`,e)}}function r(e,t){try{let t=localStorage.getItem(e);if(t)return JSON.parse(t)}catch(e){console.error(`Error reading from localStorage`,e)}return t()}function i(t,n,r){let i=document.getElementById(`edit-modal`),a=document.getElementById(`btn-edit`),o=document.getElementById(`modal-cancel`),s=document.getElementById(`modal-continue`),c=!1;function l(){let n=document.getElementById(`modal-max-container`);n.innerHTML=t.leftStats.map(t=>`
+                <div class="modal-row">
+                    <label class="modal-label">${e(t.name)} Max:</label>
+                    <input type="number" class="modal-input-val" id="edit-left-${t.id}-max" value="${t.max}" />
+                </div>
+            `).join(``),document.getElementById(`edit-xp`).value=t.xp;let r=document.getElementById(`modal-current-container`);r.innerHTML=t.rightStats.map(t=>{let n=e(t.name);return t.customizable?`
+                    <div class="modal-row">
+                        <input type="text" class="modal-input-name" id="edit-right-${t.id}-name" value="${n}" />
+                        <input type="number" class="modal-input-val" id="edit-right-${t.id}-val" value="${t.current}" />
+                    </div>
+                `:`
+                    <div class="modal-row">
+                        <label class="modal-label">${n}:</label>
+                        <input type="number" class="modal-input-val" id="edit-right-${t.id}-val" value="${t.current}" />
+                    </div>
+                `}).join(``)}function u(e=!1){l(),e?o.style.display=`none`:o.style.display=`block`,i.classList.remove(`hidden`)}function d(){i.classList.add(`hidden`)}function f(){t.xp=parseInt(document.getElementById(`edit-xp`).value)||0,t.leftStats.forEach(e=>{let t=document.getElementById(`edit-left-${e.id}-max`);if(t){let n=parseInt(t.value),r=e.max;e.max=isNaN(n)?0:n,(e.current===0||e.current===r)&&(e.current=e.max)}}),t.rightStats.forEach(e=>{if(e.customizable){let t=document.getElementById(`edit-right-${e.id}-name`);t&&(e.name=t.value||`Goal`)}let t=document.getElementById(`edit-right-${e.id}-val`);if(t){let n=parseInt(t.value);e.current=isNaN(n)?0:n}}),n(),r(),d(),c=!1}return a.addEventListener(`click`,()=>u(!1)),o.addEventListener(`click`,d),s.addEventListener(`click`,f),{openModal:u,closeModal:d,setFirstBoot:e=>{c=e},isFirstBoot:()=>c}}function a(e,t,n,r){let i=document.getElementById(`conditions-flyout`),a=document.getElementById(`flyout-toggle`),o=document.getElementById(`flyout-arrow`),s=document.getElementById(`condition-selector`);document.getElementById(`condition-trackers`);function c(){s.innerHTML=`
+            <option value="" disabled selected>Choose a condition</option>
+            ${r.map(e=>`<option value="${e}">${e}</option>`).join(``)}
+        `}function l(){i.classList.contains(`collapsed`)?(i.classList.remove(`collapsed`),i.classList.add(`expanded`),o.textContent=`▼`):(i.classList.remove(`expanded`),i.classList.add(`collapsed`),o.textContent=`▲`)}function u(r){let i=r.target.value;if(!i)return;let a=e.conditionStats.find(e=>e.id===i);a?a.current+=1:e.conditionStats.push({id:i,name:i,current:1}),s.selectedIndex=0,t(),n()}return a.addEventListener(`click`,l),s.addEventListener(`change`,u),c(),{populateSelectorOptions:c,toggleFlyout:l}}function o(){let e=document.getElementById(`btn-about`),t=document.getElementById(`about-modal`),n=document.getElementById(`about-accept`);function r(){t.classList.remove(`hidden`)}function i(){t.classList.add(`hidden`),localStorage.setItem(`aboutAccepted`,`true`)}return e.addEventListener(`click`,r),n.addEventListener(`click`,i),{openAbout:r,acceptAbout:i}}var s=`nethalastat_save_v5`,c={leftStats:[{id:`health`,defaultName:`Health`,hasMax:!0},{id:`toughness`,defaultName:`Toughness`,hasMax:!0},{id:`aether`,defaultName:`Aether`,hasMax:!0},{id:`sanity`,defaultName:`Sanity`,hasMax:!0}],rightStats:[{id:`goal1`,defaultName:`Marauder`,customizable:!0},{id:`goal2`,defaultName:`Thrill Seeker`,customizable:!0},{id:`craft`,defaultName:`Craft Supplies`},{id:`cook`,defaultName:`Cook Supplies`},{id:`rations`,defaultName:`Rations`},{id:`bandages`,defaultName:`Bandages`},{id:`lockpicks`,defaultName:`Lockpicks`}],conditionPresets:[`Poisoned`,`Bleeding`,`Cursed`,`Blessed`,`Stunned`,`Wounded`,`Fatigued`,`Weakened`,`Enraged`,`Slowed`,`Frozen`,`Burning`,`Blind`]};function l(){return{xp:0,leftStats:c.leftStats.map(e=>({id:e.id,name:e.defaultName,max:0,current:0})),rightStats:c.rightStats.map(e=>{let t={id:e.id,name:e.defaultName,current:0};return e.customizable&&(t.customizable=!0),t}),conditionStats:[]}}var u=!localStorage.getItem(s),d=r(s,l);d.conditionStats=d.conditionStats||[];function f(){n(s,d)}var p=document.getElementById(`left-trackers`),m=document.getElementById(`right-trackers`),h=document.getElementById(`condition-trackers`);document.getElementById(`condition-selector`);function g(){let e=d.leftStats.map(e=>t(e,`leftStats`,!0)).join(``);e+=`
+        <div class="tracker xp-tracker">
+            <h2 class="stat-title">XP</h2>
+            <span class="xp-current">${d.xp}</span>
+            <div class="xp-controls">
+                <button class="btn-plus" data-target="xp" data-amount="10">+10</button>
+                <button class="btn-plus" data-target="xp" data-amount="50">+50</button>
+                <button class="btn-plus" data-target="xp" data-amount="100">+100</button>
+            </div>
+        </div>
+    `,p.innerHTML=e,m.innerHTML=d.rightStats.map(e=>t(e,`rightStats`,!1)).join(``),h.innerHTML=d.conditionStats.map(e=>t(e,`conditionStats`,!1)).join(``);let n=document.getElementById(`conditions-flyout`);d.conditionStats.length>0?n.classList.add(`has-active-conditions`):n.classList.remove(`has-active-conditions`)}document.getElementById(`board`).addEventListener(`click`,e=>{let t=e.target.closest(`button`);if(!t)return;let n=t.dataset.target,r=parseInt(t.dataset.amount);if(n===`xp`)d.xp+=r;else{let e=t.dataset.id;if(n===`conditionStats`){let t=d.conditionStats.findIndex(t=>t.id===e);t!==-1&&(d.conditionStats[t].current+=r,d.conditionStats[t].current<=0&&d.conditionStats.splice(t,1))}else{let t=d[n].find(t=>t.id===e);t&&(t.current+=r,t.current<0&&(t.current=0),t.max!==void 0&&t.current>t.max&&(t.current=t.max))}}f(),g()}),a(d,f,g,c.conditionPresets);var _=i(d,f,g),v=o(),y=localStorage.getItem(`aboutAccepted`)===`true`;g(),document.getElementById(`board`).style.visibility=`visible`,y?u&&_.openModal(!0):v.openAbout();

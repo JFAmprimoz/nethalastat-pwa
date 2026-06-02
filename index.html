@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- The crucial viewport tag we discussed to lock zooming and width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nethalastat Tracker</title>
+    
+    <!-- Google Fonts: Metal Mania -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap" rel="stylesheet">
+
+    <!-- Critical CSS: Prevent layout shift and FOUC -->
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: #111111;
+        color: #ffffff;
+        font-family: 'Metal Mania', 'Luminari', 'Papyrus', 'Fantasy', serif;
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .device-wrapper {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        background-color: #050505;
+        display: flex;
+        flex-direction: column;
+      }
+
+      @media (min-width: 768px) {
+        .device-wrapper {
+          height: 75vh;
+          height: 75dvh;
+          width: calc(75vh * (9 / 16));
+          border-radius: 20px;
+          box-shadow: 0 0 50px rgba(0,0,0,0.8);
+          overflow: hidden;
+        }
+      }
+
+      .app-container {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 10px;
+        height: 85cqh;
+        max-height: 85cqh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .app-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 6cqh;
+        border-bottom: 1px solid #222;
+      }
+
+      .tracker-board {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+        gap: 15px;
+        height: 79cqh;
+        padding: 1cqh 0;
+        width: 100%;
+        visibility: hidden;
+      }
+
+      .ad-placeholder {
+        height: 15cqh;
+        background-color: #1a1a1a;
+        border-top: 1px solid #222;
+      }
+
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+
+      .modal-overlay.hidden {
+        display: none;
+      }
+    </style>
+
+    <script type="module" crossorigin src="/your-repo-name/assets/index-aNk95pJi.js"></script>
+    <link rel="stylesheet" crossorigin href="/your-repo-name/assets/index-YG4xoXar.css">
+  <link rel="manifest" href="/your-repo-name/manifest.webmanifest"><script id="vite-plugin-pwa:inline-sw">if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/your-repo-name/sw.js', { scope: '/your-repo-name/' })})}</script></head>
+
+  <body>
+    <div id="device-wrapper" class="device-wrapper">
+      <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+          <h1>Nethalastat</h1>
+          <div class="header-buttons">
+            <button class="btn-header btn-edit" id="btn-edit">Edit</button>
+            <button class="btn-header btn-about" id="btn-about">About</button>
+          </div>
+        </header>
+
+        <!-- Main Board -->
+        <main class="tracker-board" id="board">
+          <!-- Left Column: Major Stats & XP Tracker -->
+          <div id="left-column" class="column">
+            <!-- Wrapper for trackers to dynamically stretch -->
+            <div id="left-trackers"></div>
+          </div>
+
+          <!-- Right Column: Minor Stats & Dynamic Conditions Bottom-Sheet -->
+          <div id="right-column" class="column" style="position: relative;">
+            <!-- Wrapper for right trackers to dynamically stretch with bottom buffer -->
+            <div id="right-trackers"></div>
+
+            <!-- Dynamic Bottom-Sheet Conditions Flyout -->
+            <div class="conditions-flyout collapsed" id="conditions-flyout">
+              <div class="flyout-header" id="flyout-toggle">
+                <span class="flyout-title">Conditions</span>
+                <span class="flyout-arrow" id="flyout-arrow">▲</span>
+              </div>
+              <div class="flyout-content">
+                <div class="flyout-scroll-area">
+                  <div id="condition-trackers" style="display:contents;">
+                    <!-- Active conditions injected here above dropdown -->
+                  </div>
+                </div>
+                <div class="condition-select-container">
+                  <select id="condition-selector" class="condition-select">
+                    <option value="" disabled selected>Choose a condition</option>
+                    <!-- Strings list injected via JS -->
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+
+      <!-- Ad Container with Disclaimer and Placeholder -->
+      <div class="ad-container">
+        <div id="ad-disclaimer"><a href="/eula.html" target="_blank">Ads & Affiliates</a></div>
+        <div class="ad-placeholder">ADVERTISEMENT</div>
+      </div>
+
+      <!-- Edit Modal Overlay -->
+      <div id="edit-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+          <!-- UPDATED: Title Case headliners -->
+          <h2 class="modal-section-title">Maximum Values</h2>
+          
+          <div id="modal-max-container">
+            <!-- Max value inputs generated here -->
+          </div>
+
+          <!-- UPDATED: Title Case headliners -->
+          <h2 class="modal-section-title">Current Values</h2>
+          
+          <div class="modal-row">
+            <label class="modal-label">XP:</label>
+            <input type="number" class="modal-input-val" id="edit-xp" />
+          </div>
+          
+          <div id="modal-current-container">
+            <!-- Current value and customizable name inputs generated here -->
+          </div>
+
+          <div class="modal-buttons">
+            <!-- UPDATED: Title Case buttons -->
+            <button id="modal-cancel" class="modal-btn">Cancel</button>
+            <button id="modal-continue" class="modal-btn">Continue</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- About Modal Overlay -->
+      <div id="about-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+          <h2 class="modal-section-title">About</h2>
+          <p>Created by JF Amprimoz of Informed Iteration Inc.</p>
+          <p>Contact him at jf@informediteration.com to report bugs, offer feedback, or voice concerns.</p>
+          <p>This app doesn't use fancy tracking cookies. The analytics are basic and gather no personal information. It shows the same ads to all users. If you buy something from the destination, I might get a small commission that doesn't impact what you pay. </p>
+          <p>No personal information is shared with third parties, because no personal information is collected.</p>
+          <p style="margin-top: 1rem;">
+            <a href="/privacy.html" target="_blank" style="color: #fff; text-decoration: underline;">Full Privacy Policy</a><br>
+            <a href="/eula.html" target="_blank" style="color: #fff; text-decoration: underline;">Full Terms of Service</a>
+          </p>
+          <div class="modal-buttons">
+            <button id="about-accept" class="modal-btn">Accept & Continue</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
