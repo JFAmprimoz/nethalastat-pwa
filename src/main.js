@@ -7,6 +7,7 @@ import { escapeHTML, buildTrackerHTML } from './utils/dom-functions.js'
 import { loadStateFromStorage, saveStateToStorage } from './utils/storage-functions.js'
 import { initModal } from './utils/modal.js'
 import { initConditions } from './utils/conditions.js'
+import { initLegal } from './utils/legal.js'
 
 const STORAGE_KEY = 'nethalastat_save_v5'; // Upgraded storage key to migrate saved database keys to Title Case smoothly
 
@@ -185,14 +186,25 @@ const conditionsControls = initConditions(appData, saveState, renderUI, SHEET_SC
 // Initialize modal with app state and control functions
 const modalControls = initModal(appData, saveState, renderUI);
 
+// --- 7. Legal Modal Logic ---
+// Initialize legal popup
+const aboutControls = initLegal();
+
+// Check if user has accepted the About modal
+const hasAcceptedAbout = localStorage.getItem('aboutAccepted') === 'true';
+
 // Initialize the app on load
 renderUI();
 
 // Reveal the tracker board after content is rendered (prevents layout shift)
 document.getElementById('board').style.visibility = 'visible';
 
+// If user hasn't accepted About modal, show it first
+if (!hasAcceptedAbout) {
+    aboutControls.openAbout();
+}
 // If it's a completely fresh boot with no saved data, force the setup modal open immediately
-if (isFirstBoot) {
+else if (isFirstBoot) {
     modalControls.openModal(true);
 }
 
