@@ -11,10 +11,181 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap" rel="stylesheet">
 
+    <!-- Critical CSS: Prevent layout shift and FOUC -->
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: #111111;
+        color: #ffffff;
+        font-family: 'Metal Mania', 'Luminari', 'Papyrus', 'Fantasy', serif;
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .device-wrapper {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        background-color: #050505;
+        display: flex;
+        flex-direction: column;
+      }
+
+      @media (min-width: 768px) {
+        .device-wrapper {
+          height: 75vh;
+          height: 75dvh;
+          width: calc(75vh * (9 / 16));
+          border-radius: 20px;
+          box-shadow: 0 0 50px rgba(0,0,0,0.8);
+          overflow: hidden;
+        }
+      }
+
+      .app-container {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 10px;
+        height: 85cqh;
+        max-height: 85cqh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .app-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 6cqh;
+        border-bottom: 1px solid #222;
+      }
+
+      .tracker-board {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+        gap: 15px;
+        height: 79cqh;
+        padding: 1cqh 0;
+        width: 100%;
+        visibility: hidden;
+      }
+
+      .ad-placeholder {
+        height: 15cqh;
+        background-color: #1a1a1a;
+        border-top: 1px solid #222;
+      }
+
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+
+      .modal-overlay.hidden {
+        display: none;
+      }
+    </style>
+
   </head>
 
   <body>
     <div id="device-wrapper" class="device-wrapper">
+      <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+          <h1>Nethalastat</h1>
+          <button class="btn-edit" id="btn-edit">Edit</button>
+        </header>
+
+        <!-- Main Board -->
+        <main class="tracker-board" id="board">
+          <!-- Left Column: Major Stats & XP Tracker -->
+          <div id="left-column" class="column">
+            <!-- Wrapper for trackers to dynamically stretch -->
+            <div id="left-trackers"></div>
+          </div>
+
+          <!-- Right Column: Minor Stats & Dynamic Conditions Bottom-Sheet -->
+          <div id="right-column" class="column" style="position: relative;">
+            <!-- Wrapper for right trackers to dynamically stretch with bottom buffer -->
+            <div id="right-trackers"></div>
+
+            <!-- Dynamic Bottom-Sheet Conditions Flyout -->
+            <div class="conditions-flyout collapsed" id="conditions-flyout">
+              <div class="flyout-header" id="flyout-toggle">
+                <span class="flyout-title">Conditions</span>
+                <span class="flyout-arrow" id="flyout-arrow">▲</span>
+              </div>
+              <div class="flyout-content">
+                <div class="flyout-scroll-area">
+                  <div id="condition-trackers" style="display:contents;">
+                    <!-- Active conditions injected here above dropdown -->
+                  </div>
+                </div>
+                <div class="condition-select-container">
+                  <select id="condition-selector" class="condition-select">
+                    <option value="" disabled selected>Choose a condition</option>
+                    <!-- Strings list injected via JS -->
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+
+      <!-- Ad Placeholder -->
+      <div class="ad-placeholder">ADVERTISEMENT</div>
+
+      <!-- Edit Modal Overlay -->
+      <div id="edit-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+          <!-- UPDATED: Title Case headliners -->
+          <h2 class="modal-section-title">Maximum Values</h2>
+          
+          <div id="modal-max-container">
+            <!-- Max value inputs generated here -->
+          </div>
+
+          <!-- UPDATED: Title Case headliners -->
+          <h2 class="modal-section-title">Current Values</h2>
+          
+          <div class="modal-row">
+            <label class="modal-label">XP:</label>
+            <input type="number" class="modal-input-val" id="edit-xp" />
+          </div>
+          
+          <div id="modal-current-container">
+            <!-- Current value and customizable name inputs generated here -->
+          </div>
+
+          <div class="modal-buttons">
+            <!-- UPDATED: Title Case buttons -->
+            <button id="modal-cancel" class="modal-btn">Cancel</button>
+            <button id="modal-continue" class="modal-btn">Continue</button>
+          </div>
+        </div>
+      </div>
+
       <script type="module" src="/src/main.js"></script>
     </div>
   </body>

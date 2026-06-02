@@ -182,6 +182,10 @@ button:active {
     min-height: 0;
 }
 
+.tracker--major .stat-title {
+    font-size: 3cqh; 
+}
+
 .tracker--major .tracker-controls {
     justify-content: space-between;
     align-items: stretch;
@@ -194,8 +198,12 @@ button:active {
     height: 100%; 
     width: 25%; 
     max-width: 70px;
-    font-size: 4cqh;
+    font-size: 5ch;
     border-radius: 2px;
+}
+
+.tracker--major .current-value {
+    font-size: 8cqh;
 }
 
 /* --- Modifier: Minor Tracker (Right Side) --- */
@@ -207,6 +215,7 @@ button:active {
     justify-content: center;
     align-items: center;
     gap: 4cqw; 
+    height: 6cqh; /* Increased height from 5cqh to provide larger tap targets and better balance with major trackers */
 }
 
 .tracker--minor .btn-stat {
@@ -216,8 +225,8 @@ button:active {
     border-radius: 2px;
 }
 
-.tracker--minor .current-value {
-    min-width: 6cqw; 
+.tracker--minor .current-value { 
+    font-size: 5cqh;
     text-align: center;
 }
 
@@ -229,7 +238,7 @@ button:active {
 }
 
 .xp-current {
-    font-size: 4cqh;
+    font-size: 5cqh;
     font-weight: normal;
     margin-bottom: 0.5cqh;
     line-height: 1;
@@ -362,25 +371,6 @@ button:active {
     opacity: 1;
     visibility: visible;
     transition: opacity 0.2s ease-in 0.08s, visibility 0.2s;
-}
-
-.flyout-scroll-area {
-    flex: 1;
-    overflow-y: auto;
-    overscroll-behavior: contain; /* Isolate scroll boundaries */
-    padding: 1cqh 0;
-}
-
-/* Custom narrow scrollbar for conditions scroll window */
-.flyout-scroll-area::-webkit-scrollbar {
-    width: 4px;
-}
-.flyout-scroll-area::-webkit-scrollbar-track {
-    background: rgba(0,0,0,0.1);
-}
-.flyout-scroll-area::-webkit-scrollbar-thumb {
-    background: #333333;
-    border-radius: 2px;
 }
 
 .condition-select-container {
