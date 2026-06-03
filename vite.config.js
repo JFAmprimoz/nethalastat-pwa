@@ -15,8 +15,8 @@ export default defineConfig(({ mode }) => {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         },
         manifest: {
-          name: 'Nethalastat PWA',
-          short_name: 'nPWA',
+          name: 'Nethalastat',
+          short_name: 'Nstat',
           theme_color: '#000000',
           
           icons: [
@@ -30,8 +30,26 @@ export default defineConfig(({ mode }) => {
               sizes: '512x512',
               type: 'image/png'
             }
+          ],
+          screenshots: [
+            {
+              src: './screenshot-mobile.png',
+              sizes: '442x978',
+              type: 'image/png',
+              form_factor: 'narrow',
+              label: 'Nethalastat mobile stat tracker'
+            },
+            {
+              src: './screenshot-desktop.png',
+              sizes: '596x998',
+              type: 'image/png',
+              form_factor: 'wide',
+              label: 'Nethalastat stat tracker'
+            }
           ]
         },
+
+
         devOptions: {
           enabled: true
         }
