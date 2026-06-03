@@ -2,9 +2,10 @@ import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig(({ mode }) => {
+  const isProd = mode === 'production';
   return {
     // CRITICAL: Set this to your exact GitHub repository name wrapped in slashes
-    base: mode === 'production' ? '/nethalastat-pwa/' : '/',
+    base: '/',
 
     plugins: [
       VitePWA({ 
@@ -15,6 +16,7 @@ export default defineConfig(({ mode }) => {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         },
         manifest: {
+          id: isProd ? 'com.crunchcompanion.nethalastat.app' : 'com.crunchcompanion.nethalastat.dev',
           name: 'Nethalastat',
           short_name: 'Nstat',
           theme_color: '#000000',
