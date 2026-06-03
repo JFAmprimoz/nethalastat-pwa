@@ -4,7 +4,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig(({ mode }) => {
   return {
     // CRITICAL: Set this to your exact GitHub repository name wrapped in slashes
-    base: mode === 'production' ? '/your-repo-name/' : '/',
+    base: mode === 'production' ? '/nethalastat-pwa/' : '/',
 
     plugins: [
       VitePWA({ 

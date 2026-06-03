@@ -2,7 +2,6 @@ import './style.css'
 import javascriptLogo from './assets/javascript.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
-import { setupCounter } from './counter.js'
 import { escapeHTML, buildTrackerHTML } from './utils/dom-functions.js'
 import { loadStateFromStorage, saveStateToStorage } from './utils/storage-functions.js'
 import { initModal } from './utils/modal.js'
@@ -30,19 +29,20 @@ const SHEET_SCHEMA = {
         { id: 'lockpicks', defaultName: 'Lockpicks' }
     ],
     conditionPresets: [
-        "Poisoned",
         "Bleeding",
-        "Cursed",
-        "Blessed",
-        "Stunned",
-        "Wounded",
-        "Fatigued",
-        "Weakened",
-        "Enraged",
-        "Slowed",
-        "Frozen",
+        "Blinded",
         "Burning",
-        "Blind"
+        "Charmed",
+        "Cursed",
+        "Dazed",
+        "Entangled",
+        "Frightened",
+        "Freezing",
+        "Paralyzed",
+        "Poisoned",
+        "Prone",
+        "Sleeping",
+        "Stunned",
     ]
 };
 
