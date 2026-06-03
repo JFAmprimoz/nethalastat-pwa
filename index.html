@@ -11,6 +11,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap" rel="stylesheet">
 
+    <!-- Modern browsers use scalable SVG favicons -->
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+
+    <!-- iOS devices look for this specific file structure for their shortcuts -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
     <!-- Critical CSS: Prevent layout shift and FOUC -->
     <style>
       * {
@@ -105,9 +111,9 @@
       }
     </style>
 
-    <script type="module" crossorigin src="/nethalastat-pwa/assets/index-aNk95pJi.js"></script>
-    <link rel="stylesheet" crossorigin href="/nethalastat-pwa/assets/index-YG4xoXar.css">
-  <link rel="manifest" href="/nethalastat-pwa/manifest.webmanifest"><script id="vite-plugin-pwa:inline-sw">if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/nethalastat-pwa/sw.js', { scope: '/nethalastat-pwa/' })})}</script></head>
+    <script type="module" crossorigin src="/assets/index-H3ebZmLR.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-YG4xoXar.css">
+  <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:inline-sw">if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/sw.js', { scope: '/' })})}</script></head>
 
   <body>
     <div id="device-wrapper" class="device-wrapper">
@@ -160,7 +166,7 @@
 
       <!-- Ad Container with Disclaimer and Placeholder -->
       <div class="ad-container">
-        <div id="ad-disclaimer"><a href="/eula.html" target="_blank">Ads & Affiliates</a></div>
+        <div id="ad-disclaimer"><a href="./eula.html" target="_blank">Ads & Affiliates</a></div>
         <div class="ad-placeholder">ADVERTISEMENT</div>
       </div>
 
@@ -203,8 +209,8 @@
           <p>This app doesn't use fancy tracking cookies. The analytics are basic and gather no personal information. It shows the same ads to all users. If you buy something from the destination, I might get a small commission that doesn't impact what you pay. </p>
           <p>No personal information is shared with third parties, because no personal information is collected.</p>
           <p style="margin-top: 1rem;">
-            <a href="/privacy.html" target="_blank" style="color: #fff; text-decoration: underline;">Full Privacy Policy</a><br>
-            <a href="/eula.html" target="_blank" style="color: #fff; text-decoration: underline;">Full Terms of Service</a>
+            <a href="./privacy.html" target="_blank" style="color: #fff; text-decoration: underline;">Full Privacy Policy</a><br>
+            <a href="./eula.html" target="_blank" style="color: #fff; text-decoration: underline;">Full Terms of Service</a>
           </p>
           <div class="modal-buttons">
             <button id="about-accept" class="modal-btn">Accept & Continue</button>
