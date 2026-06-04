@@ -437,15 +437,31 @@ a#ad-disclaimer:link {
 .ad-placeholder {
     width: 100%;
     flex: 1;
-    background-color: #3b3b3b; 
-    color: #999999;
+    background-color: #0d0d0d; /* Deep rich dark background match */
+    color: #555555;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2cqh;
+    font-size: 1.8cqh;
     letter-spacing: 1px;
     z-index: 1000;
     overflow: hidden;
+    border-top: 1px solid #222222; /* Clean framing border */
+}
+
+/* Ensure the graphical banner link scales flawlessly inside container */
+.ad-placeholder a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Force image to fit snugly without distorting its aspect ratio */
+.ad-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Centers banner perfectly without cutting edges off */
+    display: block;
 }
 
 /* --- Edit Modal Popup --- */

@@ -208,3 +208,4 @@ else if (isFirstBoot) {
     modalControls.openModal(true);
 }
 
+initializeAdEngine();
