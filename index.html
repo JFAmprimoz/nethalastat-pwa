@@ -111,113 +111,141 @@
       }
     </style>
 
-    <script type="module" crossorigin src="/assets/index-H3ebZmLR.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-YG4xoXar.css">
-  <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:inline-sw">if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/sw.js', { scope: '/' })})}</script></head>
+  <script type="module" crossorigin src="/assets/index-U-98g7R0.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DyVvqC2h.css">
+<link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:inline-sw">if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/sw.js', { scope: '/' })})}</script></head>
 
-  <body>
-    <div id="device-wrapper" class="device-wrapper">
-      <div class="app-container">
-        <!-- Header -->
-        <header class="app-header">
-          <h1>Nethalastat</h1>
-          <div class="header-buttons">
-            <button class="btn-header btn-edit" id="btn-edit">Edit</button>
-            <button class="btn-header btn-about" id="btn-about">About</button>
-          </div>
-        </header>
+<body>
+  <div id="device-wrapper" class="device-wrapper">
+    <div class="app-container">
+      <!-- Header -->
+      <header class="app-header">
+        <h1>Nethalastat</h1>
+        <div class="header-buttons">
+          <button class="btn-header btn-edit" id="btn-edit">Edit</button>
+          <button class="btn-header btn-backup" id="btn-backup">Backup</button>
+          <button class="btn-header btn-about" id="btn-about">About</button>
+        </div>
+      </header>
 
-        <!-- Main Board -->
-        <main class="tracker-board" id="board">
-          <!-- Left Column: Major Stats & XP Tracker -->
-          <div id="left-column" class="column">
-            <!-- Wrapper for trackers to dynamically stretch -->
-            <div id="left-trackers"></div>
-          </div>
+      <!-- Main Board -->
+      <main class="tracker-board" id="board">
+        <!-- Left Column: Major Stats & XP Tracker -->
+        <div id="left-column" class="column">
+          <!-- Wrapper for trackers to dynamically stretch -->
+          <div id="left-trackers"></div>
+        </div>
 
-          <!-- Right Column: Minor Stats & Dynamic Conditions Bottom-Sheet -->
-          <div id="right-column" class="column" style="position: relative;">
-            <!-- Wrapper for right trackers to dynamically stretch with bottom buffer -->
-            <div id="right-trackers"></div>
+        <!-- Right Column: Minor Stats & Dynamic Conditions Bottom-Sheet -->
+        <div id="right-column" class="column" style="position: relative;">
+          <!-- Wrapper for right trackers to dynamically stretch with bottom buffer -->
+          <div id="right-trackers"></div>
 
-            <!-- Dynamic Bottom-Sheet Conditions Flyout -->
-            <div class="conditions-flyout collapsed" id="conditions-flyout">
-              <div class="flyout-header" id="flyout-toggle">
-                <span class="flyout-title">Conditions</span>
-                <span class="flyout-arrow" id="flyout-arrow">▲</span>
+          <!-- Dynamic Bottom-Sheet Conditions Flyout -->
+          <div class="conditions-flyout collapsed" id="conditions-flyout">
+            <div class="flyout-header" id="flyout-toggle">
+              <span class="flyout-title">Conditions</span>
+              <span class="flyout-arrow" id="flyout-arrow">▲</span>
+            </div>
+            <div class="flyout-content">
+              <div class="flyout-scroll-area">
+                <div id="condition-trackers" style="display:contents;">
+                  <!-- Active conditions injected here above dropdown -->
+                </div>
               </div>
-              <div class="flyout-content">
-                <div class="flyout-scroll-area">
-                  <div id="condition-trackers" style="display:contents;">
-                    <!-- Active conditions injected here above dropdown -->
-                  </div>
-                </div>
-                <div class="condition-select-container">
-                  <select id="condition-selector" class="condition-select">
-                    <option value="" disabled selected>Choose a condition</option>
-                    <!-- Strings list injected via JS -->
-                  </select>
-                </div>
+              <div class="condition-select-container">
+                <select id="condition-selector" class="condition-select">
+                  <option value="" disabled selected>Choose a condition</option>
+                  <!-- Strings list injected via JS -->
+                </select>
               </div>
             </div>
           </div>
-        </main>
-      </div>
-
-      <!-- Ad Container with Disclaimer and Placeholder -->
-      <div class="ad-container">
-        <div id="ad-disclaimer"><a href="./eula.html" target="_blank">Ads & Affiliates</a></div>
-        <div class="ad-placeholder">ADVERTISEMENT</div>
-      </div>
-
-      <!-- Edit Modal Overlay -->
-      <div id="edit-modal" class="modal-overlay hidden">
-        <div class="modal-content">
-          <!-- UPDATED: Title Case headliners -->
-          <h2 class="modal-section-title">Maximum Values</h2>
-          
-          <div id="modal-max-container">
-            <!-- Max value inputs generated here -->
-          </div>
-
-          <!-- UPDATED: Title Case headliners -->
-          <h2 class="modal-section-title">Current Values</h2>
-          
-          <div class="modal-row">
-            <label class="modal-label">XP:</label>
-            <input type="number" class="modal-input-val" id="edit-xp" />
-          </div>
-          
-          <div id="modal-current-container">
-            <!-- Current value and customizable name inputs generated here -->
-          </div>
-
-          <div class="modal-buttons">
-            <!-- UPDATED: Title Case buttons -->
-            <button id="modal-cancel" class="modal-btn">Cancel</button>
-            <button id="modal-continue" class="modal-btn">Continue</button>
-          </div>
         </div>
-      </div>
-
-      <!-- About Modal Overlay -->
-      <div id="about-modal" class="modal-overlay hidden">
-        <div class="modal-content">
-          <h2 class="modal-section-title">About</h2>
-          <p>Created by JF Amprimoz of Informed Iteration Inc.</p>
-          <p>Contact him at jf@informediteration.com to report bugs, offer feedback, or voice concerns.</p>
-          <p>This app doesn't use fancy tracking cookies. The analytics are basic and gather no personal information. It shows the same ads to all users. If you buy something from the destination, I might get a small commission that doesn't impact what you pay. </p>
-          <p>No personal information is shared with third parties, because no personal information is collected.</p>
-          <p style="margin-top: 1rem;">
-            <a href="./privacy.html" target="_blank" style="color: #fff; text-decoration: underline;">Full Privacy Policy</a><br>
-            <a href="./eula.html" target="_blank" style="color: #fff; text-decoration: underline;">Full Terms of Service</a>
-          </p>
-          <div class="modal-buttons">
-            <button id="about-accept" class="modal-btn">Accept & Continue</button>
-          </div>
-        </div>
+      </main>
+      <div id="update-banner" class="update-banner" style="display: none;">
+        <div class="update-message">An update is available for Nethalastat.</div>
+        <button id="update-refresh-btn" class="update-btn">Reload</button>
       </div>
 
     </div>
-  </body>
+
+
+
+    <!-- Ad Container with Disclaimer and Placeholder -->
+    <div class="ad-container">
+      <div id="ad-disclaimer"><a href="./eula.html" target="_blank">Ads & Affiliates</a></div>
+      <div class="ad-placeholder">ADVERTISEMENT</div>
+    </div>
+
+    <!-- Edit Modal Overlay -->
+    <div id="edit-modal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <!-- UPDATED: Title Case headliners -->
+        <h2 class="modal-section-title">Maximum Values</h2>
+        
+        <div id="modal-max-container">
+          <!-- Max value inputs generated here -->
+        </div>
+
+        <!-- UPDATED: Title Case headliners -->
+        <h2 class="modal-section-title">Current Values</h2>
+        
+        <div class="modal-row">
+          <label class="modal-label">XP:</label>
+          <input type="number" class="modal-input-val" id="edit-xp" />
+        </div>
+        
+        <div id="modal-current-container">
+          <!-- Current value and customizable name inputs generated here -->
+        </div>
+
+        <div class="modal-buttons">
+          <!-- UPDATED: Title Case buttons -->
+          <button id="modal-cancel" class="modal-btn">Cancel</button>
+          <button id="modal-continue" class="modal-btn">Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Modal Overlay -->
+    <div id="about-modal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <h2 class="modal-section-title">About</h2>
+        <p>Created by JF Amprimoz of Informed Iteration Inc.</p>
+        <p>Contact him at jf@informediteration.com to report bugs, offer feedback, or voice concerns.</p>
+        <p>This app doesn't use fancy tracking cookies. The analytics are basic and gather no personal information. It shows the same ads to all users. If you buy something from the destination, I might get a small commission that doesn't impact what you pay. </p>
+        <p>No personal information is shared with third parties, because no personal information is collected.</p>
+        <p style="margin-top: 1rem;">
+          <a href="./privacy.html" target="_blank" style="color: #fff; text-decoration: underline;">Full Privacy Policy</a><br>
+          <a href="./eula.html" target="_blank" style="color: #fff; text-decoration: underline;">Full Terms of Service</a>
+        </p>
+        <div class="modal-buttons">
+          <button id="about-accept" class="modal-btn">Accept & Continue</button>
+        </div>
+      </div>
+    </div>
+
+        <!-- Backup Modal Overlay -->
+    <div id="backup-modal" class="modal-overlay hidden">
+      <div class="modal-content" id="backup-modal">
+        <h2 class="modal-section-title">Backup</h2>
+        <div id="backup-options">
+          <button id="backup-download" class="modal-btn">Download Backup</button>
+          <button id="backup-continue" class="modal-btn">Copy to Clipboard</button>
+        </div>
+        <h2 class="modal-section-title">Restore</h2>
+        <div id="restore-options">
+          <button id="restore-upload" class="modal-btn">Upload Backup</button>
+          <input type="text" class="modal-input" id="restore-paste" placeholder="Paste backup string here" />
+          <button id="restore-continue" class="modal-btn">Restore</button>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+</body>
 </html>
