@@ -7,6 +7,7 @@ import { loadStateFromStorage, saveStateToStorage } from './utils/storage-functi
 import { initModal } from './utils/modal.js'
 import { initConditions } from './utils/conditions.js'
 import { initLegal } from './utils/legal.js'
+import { initializeAdEngine } from './utils/ad-functions.js'
 
 const STORAGE_KEY = 'nethalastat_save_v5'; // Upgraded storage key to migrate saved database keys to Title Case smoothly
 
