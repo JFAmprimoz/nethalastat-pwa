@@ -1,7 +1,7 @@
 import { escapeHTML } from './dom-functions.js';
 
 const AD_ENDPOINT = 'https://nethalastat-ads.crunchcompanion.com/';
-
+const SERVER_REFRESH_INTERVAL = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
 const FALLBACK_ADS = [
     {
@@ -24,48 +24,70 @@ const FALLBACK_ADS = [
     }
 ];
 
-export function initializeAdEngine() {
+// 1. INITIALIZATION: Try to load the last successfully fetched ads from localStorage.
+// If it's a brand new install, slide the INITIAL_FALLBACK_ADS in as the base.
+const localCachedAds = localStorage.getItem('nethalastat_cached_ads');
+let activeAdsPool = localCachedAds ? JSON.parse(localCachedAds) : [...FALLBACK_ADS];
+
+// Try to load the last successful fetch time so the 24-hour clock survives app closures
+const localFetchTime = localStorage.getItem('nethalastat_last_fetch_time');
+let lastFetchTime = localFetchTime ? parseInt(localFetchTime, 10) : 0;
+
+export async function fetchAdsFromServer() {
     try {
-        // Query string timestamp bypasses browser disk-cache checks entirely
+        // Cache-Buster defeats aggressive browser disk-cache layers
         const response = await fetch(`${AD_ENDPOINT}?cb=${Date.now()}`);
         if (response.ok) {
             const serverAds = await response.json();
             if (Array.isArray(serverAds) && serverAds.length > 0) {
-                // Populate server inventory cleanly
                 activeAdsPool = serverAds;
+                lastFetchTime = Date.now();
+                
+                // 2. PERSISTENCE: Bake the fresh server ads and timestamp into the device memory.
+                // These now become your definitive offline fallback ads from this exact second onward.
+                localStorage.setItem('nethalastat_cached_ads', JSON.stringify(serverAds));
+                localStorage.setItem('nethalastat_last_fetch_time', lastFetchTime.toString());
+                
+                console.log('Ad inventory synchronized and updated locally.');
             }
         }
     } catch (error) {
-        console.warn('PWA executing offline or ad network unreachable. Activating local fallback campaign pool.');
+        // 3. GRACEFUL DEGRADATION: If offline, we change absolutely nothing!
+        // activeAdsPool already contains whatever was loaded out of localStorage at startup.
+        console.warn('PWA running offline or edge unreachable. Using rolling local storage fallback.');
     }
+}
+
+export async function initializeAdEngine() {
+// Fire off a background check immediately on app boot
+    await fetchAdsFromServer();
     
-    // Draw initial banner immediately on launch
+    // Render the initial banner graphic
     rotateAd();
     
-    // Initialize standard 60-second interval rotation loop (60,000 milliseconds)
-    setInterval(rotateAd, 60000);
-}
+    // Standard 90-second visual rotation loop
+    setInterval(rotateAd, 90000);}
 
 function rotateAd() {
     const adContainer = document.querySelector('.ad-placeholder');
     if (!adContainer || activeAdsPool.length === 0) return;
 
-    // Pull tracking identifier out of transient session storage
+    // The 24-Hour Gatekeeper Check
+    if (Date.now() - lastFetchTime > SERVER_REFRESH_INTERVAL) {
+        fetchAdsFromServer(); 
+    }
+
     const lastSeenId = sessionStorage.getItem('nethalastat_last_ad_id');
     let availableChoices = activeAdsPool;
     
-    // Prevent back-to-back duplication sequence if pool size allows it
+    // Anti-Fatigue Filter
     if (activeAdsPool.length > 1) {
         availableChoices = activeAdsPool.filter(ad => ad.id !== lastSeenId);
     }
     
-    // Choose random payload index element
     const chosenAd = availableChoices[Math.floor(Math.random() * availableChoices.length)];
-    
-    // Lock choice identifier in memory to flag it for the next validation pass
     sessionStorage.setItem('nethalastat_last_ad_id', chosenAd.id);
 
-    // Render interactive DOM update securely using your existing contextual output escaping pipeline
     adContainer.innerHTML = `
         <a href="${escapeHTML(chosenAd.targetUrl)}" target="_blank" rel="noopener noreferrer">
             <img src="${escapeHTML(chosenAd.imageUrl)}" alt="${escapeHTML(chosenAd.altText)}" />

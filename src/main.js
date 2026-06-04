@@ -7,7 +7,7 @@ import { loadStateFromStorage, saveStateToStorage } from './utils/storage-functi
 import { initModal } from './utils/modal.js'
 import { initConditions } from './utils/conditions.js'
 import { initLegal } from './utils/legal.js'
-import { initializeAdEngine } from './utils/ad-functions.js'
+import { initializeAdEngine, fetchAdsFromServer } from './utils/ad-functions.js'
 
 const STORAGE_KEY = 'nethalastat_save_v5'; // Upgraded storage key to migrate saved database keys to Title Case smoothly
 
@@ -199,6 +199,11 @@ renderUI();
 
 // Reveal the tracker board after content is rendered (prevents layout shift)
 document.getElementById('board').style.visibility = 'visible';
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+        fetchAdsFromServer(); // Re-render to ensure data is up-to-date when returning to the app
+    }
+});
 
 // If user hasn't accepted About modal, show it first
 if (!hasAcceptedAbout) {
