@@ -562,3 +562,44 @@ a#ad-disclaimer:link {
 .modal-btn:active {
     background-color: #777777;
 }
+
+/* --- Update Banner Styling --- */
+.update-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #121214;
+    border: 1px solid #333338;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+    padding: 12px 20px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 9999;
+    pointer-events: auto;
+}
+
+.update-message {
+    color: #b3b3b3;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.update-btn {
+    background-color: #c93b3b; /* Crimson splash accent */
+    color: #ffffff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.update-btn:hover {
+    background-color: #a82e2e;
+}

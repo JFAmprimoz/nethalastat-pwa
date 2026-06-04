@@ -1,13 +1,25 @@
 import './style.css'
-import javascriptLogo from './assets/javascript.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { registerSW } from 'virtual:pwa-register';
 import { escapeHTML, buildTrackerHTML } from './utils/dom-functions.js'
 import { loadStateFromStorage, saveStateToStorage } from './utils/storage-functions.js'
 import { initModal } from './utils/modal.js'
 import { initConditions } from './utils/conditions.js'
 import { initLegal } from './utils/legal.js'
 import { initializeAdEngine, fetchAdsFromServer } from './utils/ad-functions.js'
+
+const updateSW = registerSW({
+  onNeedRefresh() {
+    const banner = document.getElementById('update-banner');
+    const refreshBtn = document.getElementById('update-refresh-btn');
+    if (banner && refreshBtn) {
+      banner.style.display = 'flex';
+      refreshBtn.addEventListener('click', () => updateSW(true));
+    }
+  },
+  onOfflineReady() {
+    console.log('Nethalastat is ready to run offline!');
+  }
+});
 
 const STORAGE_KEY = 'nethalastat_save_v5'; // Upgraded storage key to migrate saved database keys to Title Case smoothly
 
@@ -71,6 +83,8 @@ function createNewSheet() {
         conditionStats: [] // Active condition trackers list
     };
 }
+
+
 
 // Determine if it's the very first time launching the app
 let isFirstBoot = !localStorage.getItem(STORAGE_KEY);
