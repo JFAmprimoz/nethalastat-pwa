@@ -233,6 +233,7 @@ button:active {
 .tracker--minor .current-value { 
     font-size: 5cqh;
     text-align: center;
+    line-height: 1;
 }
 
 /* --- Component: XP Tracker (Bottom Left) --- */

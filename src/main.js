@@ -5,6 +5,7 @@ import { loadStateFromStorage, saveStateToStorage } from './utils/storage-functi
 import { initModal } from './utils/modal.js'
 import { initConditions } from './utils/conditions.js'
 import { initLegal } from './utils/legal.js'
+import { initBackupModal } from './utils/backup-modal.js'
 import { initializeAdEngine, fetchAdsFromServer } from './utils/ad-functions.js'
 
 const updateSW = registerSW({
@@ -87,7 +88,7 @@ function createNewSheet() {
 
 
 // Determine if it's the very first time launching the app
-let isFirstBoot = !localStorage.getItem(STORAGE_KEY);
+let isSaveEmpty = !localStorage.getItem(STORAGE_KEY);
 
 // Load active state from Storage or instantiate a brand new empty schema definition
 let appData = loadStateFromStorage(STORAGE_KEY, createNewSheet);
@@ -205,6 +206,10 @@ const modalControls = initModal(appData, saveState, renderUI);
 // Initialize legal popup
 const aboutControls = initLegal();
 
+// --- 8. Backup Modal Logic ---
+// Initialize backup modal
+const backupControls = initBackupModal(STORAGE_KEY);
+
 // Check if user has accepted the About modal
 const hasAcceptedAbout = localStorage.getItem('aboutAccepted') === 'true';
 
@@ -222,9 +227,9 @@ document.addEventListener('visibilitychange', () => {
 // If user hasn't accepted About modal, show it first
 if (!hasAcceptedAbout) {
     aboutControls.openAbout();
-}
-// If it's a completely fresh boot with no saved data, force the setup modal open immediately
-else if (isFirstBoot) {
+    document.getElementById('about-accept')
+    .addEventListener('click', () => modalControls.openModal(true));
+} else if (isSaveEmpty) {
     modalControls.openModal(true);
 }
 
