@@ -6,7 +6,7 @@ import { initModal } from './utils/modal.js'
 import { initConditions } from './utils/conditions.js'
 import { initLegal } from './utils/legal.js'
 import { initBackupModal } from './utils/backup-modal.js'
-import { initializeAdEngine, fetchAdsFromServer } from './utils/ad-functions.js'
+import { initializeAdEngine, fetchAdsFromServer, fetchAdsIfStale } from './utils/ad-functions.js'
 
 const updateSW = registerSW({
   onNeedRefresh() {
@@ -220,13 +220,14 @@ renderUI();
 document.getElementById('board').style.visibility = 'visible';
 document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
-        fetchAdsFromServer(); // Re-render to ensure data is up-to-date when returning to the app
+        fetchAdsIfStale(); // Re-render to ensure data is up-to-date when returning to the app
     }
 });
 
 // If user hasn't accepted About modal, show it first
 if (!hasAcceptedAbout) {
     aboutControls.openAbout();
+    window.umami?.track('first-load')
     document.getElementById('about-accept')
     .addEventListener('click', () => modalControls.openModal(true));
 } else if (isSaveEmpty) {

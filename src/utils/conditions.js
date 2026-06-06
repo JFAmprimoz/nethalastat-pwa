@@ -32,6 +32,9 @@ export function initConditions(appData, saveState, renderUI, conditionPresets) {
             flyout.classList.remove('collapsed');
             flyout.classList.add('expanded');
             flyoutArrow.textContent = '▼';
+            window.umami?.track('flyout-open', { 
+                type: 'conditions'
+            });
         } else {
             flyout.classList.remove('expanded');
             flyout.classList.add('collapsed');

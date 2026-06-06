@@ -30,7 +30,10 @@ export function initBackupModal(storageKey) {
      */
     function openBackupModal() {
         backupModal.classList.remove('hidden');
-    }
+        window.umami?.track('modal-open', { 
+            type: 'backup'})
+        };
+    
 
     /**
      * Close the backup modal

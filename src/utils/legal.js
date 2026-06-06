@@ -12,7 +12,10 @@ export function initLegal() {
      */
     function openAbout() {
         legalModal.classList.remove('hidden');
-    }
+            window.umami?.track('modal-open', { 
+            type: 'About'})
+        };
+
 
     /**
      * Close the about modal and mark consent as accepted

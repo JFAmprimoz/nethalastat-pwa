@@ -65,11 +65,15 @@ export function initModal(appData, saveState, renderUI) {
 
         if (forceFirstLoad) {
             btnCancel.style.display = 'none';
+
         } else {
             btnCancel.style.display = 'block';
-        }
-
+        };
+        
         modal.classList.remove('hidden');
+
+        window.umami?.track('modal-open', { 
+        type: 'Edit'})
     }
 
     /**

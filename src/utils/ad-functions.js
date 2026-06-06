@@ -33,6 +33,12 @@ let activeAdsPool = localCachedAds ? JSON.parse(localCachedAds) : [...FALLBACK_A
 const localFetchTime = localStorage.getItem('nethalastat_last_fetch_time');
 let lastFetchTime = localFetchTime ? parseInt(localFetchTime, 10) : 0;
 
+export async function fetchAdsIfStale() {
+    if (Date.now() - lastFetchTime > SERVER_REFRESH_INTERVAL) {
+        await fetchAdsFromServer();
+    }
+}
+
 export async function fetchAdsFromServer() {
     try {
         // Cache-Buster defeats aggressive browser disk-cache layers
@@ -56,6 +62,7 @@ export async function fetchAdsFromServer() {
         // activeAdsPool already contains whatever was loaded out of localStorage at startup.
         console.warn('PWA running offline or edge unreachable. Using rolling local storage fallback.');
     }
+
 }
 
 export async function initializeAdEngine() {
@@ -89,8 +96,28 @@ function rotateAd() {
     sessionStorage.setItem('nethalastat_last_ad_id', chosenAd.id);
 
     adContainer.innerHTML = `
-        <a href="${escapeHTML(chosenAd.targetUrl)}" target="_blank" rel="noopener noreferrer">
+        <a class="ad-link" href="${escapeHTML(chosenAd.targetUrl)}" target="_blank" rel="noopener noreferrer">
             <img src="${escapeHTML(chosenAd.imageUrl)}" alt="${escapeHTML(chosenAd.altText)}" />
         </a>
     `;
+
+    if (window.umami) {
+        window.umami.track('ad-impression', { 
+            href: chosenAd.targetUrl,
+            ad_id: chosenAd.id,
+            image_url: chosenAd.imageUrl
+        });
+    }
+
+    const adLink = adContainer.querySelector('.ad-link');
+    adLink?.addEventListener('click', () => {
+        // Umami analytics tracking for ad clicks
+        if (window.umami) {
+            window.umami.track('ad-click', { 
+                href: chosenAd.targetUrl,
+                ad_id: chosenAd.id,
+                image_url: chosenAd.imageUrl
+            });
+        }
+    });
 }
