@@ -564,6 +564,12 @@ a#ad-disclaimer:link {
     background-color: #777777;
 }
 
+/* --- Backup Modal --- */
+#backup-modal .modal-btn {
+    padding: 1.5cqh 1.5cqw;
+    margin: 1.5cqh 0;
+}
+
 /* --- Update Banner Styling --- */
 .update-banner {
     position: fixed;
