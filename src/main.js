@@ -217,7 +217,13 @@ const hasAcceptedAbout = localStorage.getItem('aboutAccepted') === 'true';
 renderUI();
 
 // Reveal the tracker board after content is rendered (prevents layout shift)
-document.getElementById('board').style.visibility = 'visible';
+// Use double requestAnimationFrame to ensure container queries resolve correctly
+// after SW-triggered reloads, preventing layout collapse on the new version
+requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+        document.getElementById('board').style.visibility = 'visible';
+    });
+});
 document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
         fetchAdsIfStale(); // Re-render to ensure data is up-to-date when returning to the app
