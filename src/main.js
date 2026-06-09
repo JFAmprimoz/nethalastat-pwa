@@ -150,7 +150,8 @@ function renderUI() {
 }
 
 
-// --- 4. Event Delegation for Buttons ---
+// --- 4. Event Delegations ---
+// --- 4a. Click-tap delegation for buttons ---
 document.getElementById('board').addEventListener('click', (e) => {
     const btn = e.target.closest('button');
     if (!btn) return; 
@@ -192,6 +193,53 @@ document.getElementById('board').addEventListener('click', (e) => {
     // Save and re-render instantly
     saveState();
     renderUI();
+});
+
+// --- 4b. Long-press delegation for values ---
+let longPressTimer = null;
+const LONG_PRESS_DURATION = 1000;
+
+document.getElementById('board').addEventListener('pointerdown', (e) => {
+    const valueEl = e.target.closest('.current-value, .xp-current');
+    if (!valueEl) return;
+
+    longPressTimer = setTimeout(() => {
+        modalControls.openModal(false);
+
+        // Determine which input to focus
+        requestAnimationFrame(() => {
+            let inputId;
+            if (valueEl.classList.contains('xp-current')) {
+                inputId = 'edit-xp';
+            } else {
+                const tracker = valueEl.closest('.tracker');
+                const btn = tracker?.querySelector('[data-id]');
+                const statId = btn?.dataset.id;
+                const targetArray = btn?.dataset.target;
+
+                if (statId && targetArray === 'leftStats') {
+                    inputId = `edit-left-${statId}-max`;
+                } else if (statId) {
+                    inputId = `edit-right-${statId}-val`;
+                }
+            }
+            if (inputId) {
+                document.getElementById(inputId)?.focus();
+            }
+        });
+    }, LONG_PRESS_DURATION);
+});
+
+document.getElementById('board').addEventListener('pointerup', () => {
+    clearTimeout(longPressTimer);
+});
+
+document.getElementById('board').addEventListener('pointercancel', () => {
+    clearTimeout(longPressTimer);
+});
+
+document.getElementById('board').addEventListener('pointermove', () => {
+    clearTimeout(longPressTimer);
 });
 
 // --- 5. Conditions & Flyout Logic ---
