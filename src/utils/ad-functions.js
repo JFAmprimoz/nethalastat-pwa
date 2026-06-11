@@ -5,34 +5,34 @@ const SERVER_REFRESH_INTERVAL = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
 const FALLBACK_ADS = [
     {
-        "id": "kn-ratkin-expand",
-        "imageUrl": "https://informediteration.com/wp-content/uploads/2026/06/kn-ratkin-expand.png",
-        "targetUrl": "https://www.drivethrurpg.com/en/product/538168/the-warren-of-the-ratkin?affiliate_id=5159784",
-        "altText": "An ad banner for a game expansion. On the left is a dramatic fantasy painting of a bearded male warrior in brown leather armor and trousers, fending off a swarm of human-sized rat creatures (Ratkin) in a mossy, greenish dungeon setting. He wields two large daggers and has a determined, grim expression. The right side has a dark brown background with green text that reads: \"EXPAND YOUR Ker Nethalas GAME WITH Warren of the Ratkin\". \"Ker Nethalas\" and \"Warren of the Ratkin\" are in a stylized Gothic-style font."
+      "id": "kn-ratkin-expand",
+      "imageUrl": "https://informediteration.com/wp-content/uploads/2026/06/kn-ratkin-expand.png",
+      "targetUrl": "https://www.drivethrurpg.com/en/product/538168/the-warren-of-the-ratkin?affiliate_id=5159784",
+      "altText": "An ad banner for a game expansion. On the left is a dramatic fantasy painting of a bearded male warrior in brown leather armor and trousers, fending off a swarm of human-sized rat creatures (Ratkin) in a mossy, greenish dungeon setting. He wields two large daggers and has a determined, grim expression. The right side has a dark brown background with green text that reads: \"EXPAND YOUR Ker Nethalas GAME WITH Warren of the Ratkin\". \"Ker Nethalas\" and \"Warren of the Ratkin\" are in a stylized Gothic-style font."
     },
     {
-        "id": "kn-ratkin-persist",
-        "imageUrl": "https://informediteration.com/wp-content/uploads/2026/06/kn-ratkin-persist-enemies.png",
-        "targetUrl": "https://www.drivethrurpg.com/en/product/538168/the-warren-of-the-ratkin?affiliate_id=5159784",
-        "altText": "An ad banner for a game expansion, featuring the same artwork on the left as the previous image, showing the warrior fighting the Ratkin. On the dark brown panel to the right, there is green text that reads: \"A PERSISTENT DOMAIN AND NEW ENEMIES FOR Ker Nethalas Warren of the Ratkin\". \"Ker Nethalas\" and \"Warren of the Ratkin\" are in the same stylized Gothic font."
+      "id": "kn-ratkin-persist",
+      "imageUrl": "https://informediteration.com/wp-content/uploads/2026/06/kn-ratkin-persist-enemies.png",
+      "targetUrl": "https://www.drivethrurpg.com/en/product/538168/the-warren-of-the-ratkin?affiliate_id=5159784",
+      "altText": "Promotional banner for the Ker Nethalas expansion \"Warren of the Ratkin.\" The text reads \"A persistent domain and new enemies,\" displayed next to a fantasy illustration of a warrior battling rat monsters."
     },
     {
-        "id": "kn-masteries-over",
-        "imageUrl": "https://informediteration.com/wp-content/uploads/2026/06/kn-masteries-over100.png",
-        "targetUrl": "https://www.drivethrurpg.com/en/product/515550/the-book-of-masteries?affiliate_id=5159784",
-        "altText": "An ad banner with a split layout. The left half is a gritty, black and white sketch of chaotic combat, featuring skeletal figures and figures of combatants. The right half is a solid black panel with white text that reads: \"Over 100 New Abilities Ker Nethalas The Book of Masteries\". \"Ker Nethalas\" and \"The Book of Masteries\" use a stylized, ornate font."
+      "id": "kn-masteries-over",
+      "imageUrl": "https://informediteration.com/wp-content/uploads/2026/06/kn-masteries-over100.png",
+      "targetUrl": "https://www.drivethrurpg.com/en/product/515550/the-book-of-masteries?affiliate_id=5159784",
+      "altText": "Promotional banner for \"Ker Nethalas: The Book of Masteries\" featuring a gritty, black-and-white fantasy drawing of bodies and a necromancer, accompanied by the text \"Over 100 New Abilities.\""
     },
     {
-        "id": "kn-ce-detailed",
-        "imageUrl": "https://informediteration.com/wp-content/uploads/2026/06/kn-ce-detailed-solo-arena.png",
-        "targetUrl": "https://www.drivethrurpg.com/en/product/489991/carnage-aether-revenants-of-veldonia?affiliate_id=5159784",
-        "altText": "An ad banner for a game module. On the left is a fantasy painting of a large colosseum-like arena. A massive, roaring minotaur creature with a bloody cleaver stands on an upper ramp, while a golden-armored knight and a rogue-like character fight green undead figures on a lower level. The right side has a dark greenish-brown panel with yellow text that reads: \"CARNAGE & AETHER Detailed Solo Tactical Arena Combat in the world of Ker Nethalas\". \"CARNAGE & AETHER\" and \"Ker Nethalas\" are in a stylized Gothic-style font."
+      "id": "kn-ce-detailed",
+      "imageUrl": "https://informediteration.com/wp-content/uploads/2026/06/kn-ce-detailed-solo-arena.png",
+      "targetUrl": "https://www.drivethrurpg.com/en/product/489991/carnage-aether-revenants-of-veldonia?affiliate_id=5159784",
+      "altText": "An ad banner for a game module. On the left is a fantasy painting of a large colosseum-like arena. A massive, roaring minotaur creature with a bloody cleaver stands on an upper ramp fighting a golden-armored knight while a rogue-like character fights green undead figures on a lower level. The right side has a dark greenish-brown panel with yellow text that reads: \"CARNAGE & AETHER Detailed Solo Tactical Arena Combat in the world of Ker Nethalas\". \"CARNAGE & AETHER\" and \"Ker Nethalas\" are in a stylized Gothic-style font."
     },
     {
-        "id": "atdw-core-dark",
-        "imageUrl": "https://informediteration.com/wp-content/uploads/2026/06/atdw-core-dark.png",
-        "targetUrl": "https://www.drivethrurpg.com/en/product/431730/across-a-thousand-dead-worlds?affiliate_id=5159784",
-        "altText": "A text-only ad on a dark, nebulous blue background with red spatter effects, suggesting a cosmic or space horror setting. The text is all in a futuristic, stylized font, written in reddish-pink. It reads: \"DARK SURVIVAL SOLO SCI-FI RPG FROM THE CREATOR OF KER NETHALAS ACROSS A THOUSAND DEAD WORLDS.\" The words \"KER NETHALAS\" are in a glitch-type font. The larger text at the bottom is the main title, \"ACROSS A THOUSAND DEAD WORLDS.\""
+      "id": "atdw-core-dark",
+      "imageUrl": "https://informediteration.com/wp-content/uploads/2026/06/atdw-core-dark.png",
+      "targetUrl": "https://www.drivethrurpg.com/en/product/431730/across-a-thousand-dead-worlds?affiliate_id=5159784",
+      "altText": "Promotional banner for \"Across a Thousand Dead Worlds,\" a dark survival solo sci-fi RPG from the creator of Ker Nethalas, set against a dark sci-fi background."
     }
 ];
 
