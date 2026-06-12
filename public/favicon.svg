@@ -1,197 +1,94 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
-   viewBox="0 0 512 512"
-   width="100%"
-   height="100%"
+   width="512"
+   height="512"
+   viewBox="0 0 143.03566 143.03566"
    version="1.1"
-   id="svg15"
+   id="svg1"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
-     id="defs2">
-    <!-- 
-      This mask creates a perfect, scalable visual gap where the elements cross.
-      White preserves the sword, black erases a local channel centered at (256, 256).
-      Using a 90-degree rotation inside the mask perfectly counteracts the sword's -45 degree hilt rotation,
-      aligning the cutout at exactly 45 degrees to match the pen.
-      
-      FIXED: Swapped width to 28px (matching the 24px pen + 2px gaps) 
-             and height to 36px (fully clearing the 28px sword blade width).
-    -->
-    <mask
-       id="pen-knockout">
-      <rect
-         x="0"
-         y="0"
-         width="512"
-         height="512"
-         fill="#ffffff"
-         id="rect1" />
-      <g
-         transform="rotate(90 256 256)"
-         id="g2">
-        <rect
-           x="242"
-           y="238"
-           width="28"
-           height="36"
-           rx="2"
-           fill="#000000"
-           id="rect2" />
-      </g>
-    </mask>
-  </defs>
-  <!-- ================= BACKGROUND ROUNDEL ================= -->
-  <!-- Rich dark charcoal backdrop -->
-  <circle
-     cx="256"
-     cy="256"
-     r="230"
-     fill="#0f0f11"
-     id="circle2" />
-  <!-- ================= TRANSLATION WRAPPER ================= -->
-  <!-- 
-    Shifts the entire crossed asset down by 15px to offset the visual weight 
-    imbalance caused by the elongated tips, aligning it perfectly to the eye.
-  -->
+     id="defs1" />
   <g
-     transform="translate(0, 15)"
-     id="g15">
-    <!-- ================= SWORD (Bottom-Left to Top-Right) ================= -->
-    <!-- Mask is applied here to slice out the crossover gap automatically -->
+     id="layer1">
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.214342"
+       id="path1"
+       cx="71.51783"
+       cy="71.51783"
+       r="70.817055" />
+  </g>
+  <g
+     id="layer2">
     <g
-       transform="rotate(-45 256 256)"
-       mask="url(#pen-knockout)"
-       id="g7">
-      <!-- Solid Bold Blade (Flat white for maximum contrast) -->
-      <polygon
-         points="256,50 242,80 242,315 270,315 270,80"
-         fill="#ffffff"
-         id="polygon2" />
-      <!-- Flat Minimal Shadow Side -->
-      <polygon
-         points="256,50 256,315 270,315 270,80"
-         fill="#cbd5e1"
-         id="polygon3" />
-      <!-- Simplified Flat Gold Crossguard -->
-      <rect
-         x="196"
-         y="315"
-         width="120"
-         height="14"
-         rx="3"
-         fill="#fbbf24"
-         id="rect3" />
-      <!-- Sleek Minimal Grip -->
-      <rect
-         x="246"
-         y="329"
-         width="20"
-         height="66"
-         rx="2"
-         fill="#334155"
-         id="rect4" />
-      <rect
-         x="246"
-         y="342"
-         width="20"
-         height="5"
-         fill="#fbbf24"
-         id="rect5" />
-      <rect
-         x="246"
-         y="358"
-         width="20"
-         height="5"
-         fill="#fbbf24"
-         id="rect6" />
-      <rect
-         x="246"
-         y="374"
-         width="20"
-         height="5"
-         fill="#fbbf24"
-         id="rect7" />
-      <!-- Solid Gold Pommel -->
-      <circle
-         cx="256"
-         cy="405"
-         r="14"
-         fill="#fbbf24"
-         id="circle7" />
+       id="g8"
+       transform="rotate(45.518539,71.517829,69.897885)">
+      <g
+         id="g5">
+        <path
+           style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.214342"
+           d="m 71.516483,20.633117 c -2.039999,2.622854 -5.77028,7.868562 -5.77028,7.868562 l 3.497138,77.286761 2.501409,0.33316 M 71.516483,20.633117 c 2.039999,2.622854 5.77028,7.868562 5.77028,7.868562 l -3.497138,77.286761 -2.501409,0.33316"
+           id="path2"
+           transform="translate(0.00134603,-6.81942)" />
+        <path
+           style="fill:#d4aa00;fill-opacity:1;stroke:#d4aa00;stroke-width:0.214342"
+           d="m 71.671036,106.05603 c -2.427083,1.09916 -5.38874,0.92839 -7.673402,-0.44245 -1.955011,-1.17305 -3.384915,-3.18791 -3.846851,-5.42056 -0.583462,0.23155 -1.105894,0.61497 -1.501735,1.10216 -0.39584,0.48719 -0.664202,1.07705 -0.771407,1.69555 -0.109767,0.63328 -0.05099,1.29159 0.141728,1.90474 0.192716,0.61315 0.517219,1.18159 0.924941,1.67844 0.815444,0.9937 1.945301,1.68798 3.129897,2.1871 3.027231,1.2755 6.545534,1.33947 9.617131,0.17486 m 0.0203,-2.87984 c 2.427083,1.09916 5.38874,0.92839 7.673402,-0.44245 1.955011,-1.17305 3.384915,-3.18791 3.846851,-5.42056 0.583462,0.23155 1.105894,0.61497 1.501735,1.10216 0.39584,0.48719 0.664202,1.07705 0.771407,1.69555 0.109767,0.63328 0.05099,1.29159 -0.141728,1.90474 -0.192716,0.61315 -0.517219,1.18159 -0.924941,1.67844 -0.815444,0.9937 -1.945301,1.68798 -3.129897,2.1871 -3.027231,1.2755 -6.545534,1.33947 -9.617131,0.17486"
+           id="path3"
+           transform="translate(-0.17350897,-7.3439908)" />
+      </g>
+      <path
+         style="fill:#999999;fill-opacity:1;stroke:#999999;stroke-width:0.194744"
+         d="m 71.341733,118.9441 c -2.040368,-3.02694 -3.163005,-6.66389 -3.183747,-10.31424 -0.01206,-2.12271 0.341919,-4.24702 1.041643,-6.25113 h 2.173014 m -0.03091,16.56537 c 2.05165,-3.0193 3.187853,-6.65204 3.222217,-10.30229 0.01998,-2.12265 -0.326066,-4.24827 -1.018306,-6.25497 l -2.172999,-0.008"
+         id="path6"
+         transform="matrix(1,0,0,1.2113942,0.15455315,-22.350565)" />
+      <ellipse
+         style="fill:#d4aa00;fill-opacity:1;stroke:#d4aa00;stroke-width:0.214342"
+         id="path8"
+         cx="71.516479"
+         cy="122.66213"
+         rx="3.3222816"
+         ry="3.2785673" />
     </g>
-    <!-- ================= PEN (Bottom-Right to Top-Left) ================= -->
-    <!-- Drawn perfectly on top of the mask cutout gap -->
+  </g>
+  <g
+     id="layer3">
     <g
-       transform="rotate(45 256 256)"
-       id="g14">
-      <!-- 1. Solid Blue Plastic Pen Barrel -->
-      <rect
-         x="244"
-         y="115"
-         width="24"
-         height="255"
-         rx="2"
-         fill="#2563eb"
-         id="rect8" />
-      <rect
-         x="256"
-         y="115"
-         width="12"
-         height="255"
-         fill="#3b82f6"
-         id="rect9" />
-      <!-- 2. Clean Silver Nose Cone -->
-      <polygon
-         points="244,115 248,80 264,80 268,115"
-         fill="#94a3b8"
-         id="polygon9" />
-      <polygon
-         points="256,115 256,80 264,80 268,115"
-         fill="#cbd5e1"
-         id="polygon10" />
-      <!-- 3. Bold Gold Ballpoint Tip -->
-      <polygon
-         points="249,80 256,54 263,80"
-         fill="#f59e0b"
-         id="polygon11" />
-      <circle
-         cx="256"
-         cy="53"
-         r="2.5"
-         fill="#1e293b"
-         id="circle11" />
-      <!-- 4. Chrome Cap Ring -->
-      <rect
-         x="246"
-         y="370"
-         width="20"
-         height="15"
-         fill="#cbd5e1"
-         id="rect11" />
-      <rect
-         x="246"
-         y="370"
-         width="10"
-         height="15"
-         fill="#94a3b8"
-         id="rect12" />
-      <!-- 5. Click Plunger -->
-      <rect
-         x="248"
-         y="385"
-         width="16"
-         height="15"
-         rx="1"
-         fill="#2563eb"
-         id="rect13" />
-      <rect
-         x="248"
-         y="385"
-         width="8"
-         height="15"
-         fill="#3b82f6"
-         id="rect14" />
+       id="g12"
+       transform="matrix(0.76625407,-0.7425583,0.74611894,0.76259734,-41.471079,66.204577)"
+       style="stroke-width:0.937252">
+      <g
+         id="g11"
+         style="stroke-width:0.937252">
+        <rect
+           style="fill:#0066ff;fill-opacity:1;stroke:#0066ff;stroke-width:0.261837;stroke-dasharray:none"
+           id="rect8"
+           width="6.6766963"
+           height="79.87307"
+           x="68.179482"
+           y="35.856327" />
+        <rect
+           style="fill:#999999;fill-opacity:1;stroke:#999999;stroke-width:0.200892"
+           id="rect9"
+           width="3.2147055"
+           height="9.3968315"
+           x="69.910477"
+           y="115.97668" />
+        <path
+           style="fill:#999999;fill-opacity:1;stroke:#999999;stroke-width:0.220281"
+           d="m 74.897363,113.92598 c 2.049693,-3.53068 3.353394,-7.49209 3.801097,-11.54998 0.644716,-5.843571 -0.513211,-11.873532 -3.276524,-17.062663 1.408296,5.142305 2.035877,10.497664 1.854636,15.826243 -0.101161,2.97419 -0.476037,6.01764 -1.854638,8.65497 -0.222785,0.4262 -0.470639,0.83929 -0.741855,1.23643"
+           id="path9"
+           transform="matrix(1,0,0,0.83171555,0,19.169011)" />
+        <path
+           style="fill:#999999;fill-opacity:1;stroke:#999999;stroke-width:0.261837;stroke-dasharray:none"
+           d="M 68.196698,35.763597 71.473202,25.06852 74.837474,35.763597 Z"
+           id="path10" />
+      </g>
+      <path
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.261837;stroke-dasharray:none"
+         d="m 70.847162,27.01589 h 1.298247"
+         id="path11" />
     </g>
   </g>
 </svg>

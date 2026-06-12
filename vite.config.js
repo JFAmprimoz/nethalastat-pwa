@@ -40,15 +40,11 @@ export default defineConfig(({ mode }) => {
           
           icons: [
             {
-              src: './pwa-192x192.png',
-              sizes: '192x192',
-              type: 'image/png'
+              src: './favicon.svg',
+              sizes: '44x44 48x48 64x64 96x96 128x128 144x144 192x192 256x256 384x384 512x512',
+              type: 'image/svg+xml',
+              purpose: 'any maskable' // Ensures the SVG icon can be used in all contexts, including as a maskable icon for Android.
             },
-            {
-              src: './pwa-512x512.png',
-              sizes: '512x512',
-              type: 'image/png'
-            }
           ],
           screenshots: [
             {
