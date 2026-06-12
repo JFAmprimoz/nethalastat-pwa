@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
+import ogPlugin from 'vite-plugin-open-graph'
 
 export default defineConfig(({ mode }) => {
   const isProd = mode === 'production';
@@ -8,6 +9,21 @@ export default defineConfig(({ mode }) => {
     base: '/',
 
     plugins: [
+
+      ogPlugin({
+        basic: {
+          url: 'https://nethalastat.crunchcompanion.com', // Must be your live URL for correct OG tags
+          title: 'Nethalastat - A Ker Nethalas Stat Tracker App',
+          type: 'website',
+          image: 'https://nethalastat.crunchcompanion.com/og-image.png', // Must be absolute URL
+          description: 'Nethalastat is a stat tracking app for the solo RPG Ker Nethalas, built with PWA technology for offline use.',
+        },
+        twitter: {
+          card: 'summary_large_image', // Forces Discord to show a large 16:9 card
+          image: 'https://nethalastat.crunchcompanion.com/large-og-image.png',
+        }
+      }),
+
       VitePWA({ 
         registerType: 'prompt', // Prompts user to install when criteria are met
         injectRegister: 'inline', // Safely inlines the SW registration script
@@ -17,8 +33,9 @@ export default defineConfig(({ mode }) => {
         },
         manifest: {
           id: isProd ? 'com.crunchcompanion.nethalastat.app' : 'com.crunchcompanion.nethalastat.dev',
-          name: 'Nethalastat',
-          short_name: 'Nstat',
+          name: 'Nethalastat - A Ker Nethalas Stat Tracker App',
+          description: 'A stat tracking app for the solo RPG Ker Nethalas, built with PWA technology for offline use.',
+          short_name: 'Nethalastat',
           theme_color: '#000000',
           
           icons: [

@@ -62,6 +62,7 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    border-bottom: 1px solid #222;
 }
 
 /* --- Header --- */
@@ -102,7 +103,7 @@ body {
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); 
     gap: 15px;
     height: var(--board-height);
-    padding: 1cqh 0;
+    padding: 1cqh 0 0;
     width: 100%; 
 }
 
@@ -446,7 +447,7 @@ a#ad-disclaimer:link {
 .ad-placeholder {
     width: 100%;
     flex: 1;
-    background-color: #0d0d0d; /* Deep rich dark background match */
+    /*  background-color: #0d0d0d; /* Deep rich dark background match */
     color: #555555;
     display: flex;
     justify-content: center;
@@ -455,7 +456,6 @@ a#ad-disclaimer:link {
     letter-spacing: 1px;
     z-index: 1000;
     overflow: hidden;
-    border-top: 1px solid #222222; /* Clean framing border */
 }
 
 /* Ensure the graphical banner link scales flawlessly inside container */
@@ -469,7 +469,8 @@ a#ad-disclaimer:link {
 .ad-placeholder img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Centers banner perfectly without cutting edges off */
+    object-fit: contain;
+    object-position: center;
     display: block;
 }
 
