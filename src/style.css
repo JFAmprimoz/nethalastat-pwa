@@ -21,11 +21,10 @@ body {
     user-select: none;
     
     /* Strict Viewport Locking & Centering */
-    height: 100vh; /* Fallback for older browsers */
     height: 100dvh; /* Accounts for mobile browser address bars */
     overflow: hidden; 
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 }
 
@@ -33,7 +32,6 @@ body {
 .device-wrapper {
     position: relative; /* Allows absolute positioning for modal to stay inside bounds */
     width: 100vw;
-    height: 100vh; /* Fallback */
     height: 100dvh; /* Accounts for mobile browser address bars */
     background-color: #050505;
     display: flex;

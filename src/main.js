@@ -14,11 +14,7 @@ const updateSW = registerSW({
     const refreshBtn = document.getElementById('update-refresh-btn');
     if (banner && refreshBtn) {
       banner.style.display = 'flex';
-      refreshBtn.addEventListener('click', () => {
-        // Use hard navigation instead of updateSW(true) to force full viewport recalculation
-        // This prevents container query context from being stale after reload
-        window.location.href = window.location.href;
-      });
+      refreshBtn.addEventListener('click', () => updateSW(true));
     }
   },
   onOfflineReady() {
@@ -268,18 +264,30 @@ const hasAcceptedAbout = localStorage.getItem('aboutAccepted') === 'true';
 // Initialize the app on load
 renderUI();
 
-// Reveal the tracker board after content is rendered (prevents layout shift)
-// Use double requestAnimationFrame to ensure container queries resolve correctly
-// after SW-triggered reloads, preventing layout collapse on the new version
-requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-        document.getElementById('device-wrapper').style.visibility = 'visible';
-    });
-});
+// Set wrapper height from window.innerHeight to work around Android PWA viewport unit bug
+// location.reload() in PWA WebView doesn't reset dvh/vh calculations
+const wrapper = document.getElementById('device-wrapper');
+const body = document.body;
+
+function setCorrectHeights() {
+    const correctHeight = window.innerHeight + 'px';
+    wrapper.style.height = correctHeight;
+    body.style.height = correctHeight;
+    wrapper.getBoundingClientRect(); // Force reflow so container query units recompute
+}
+
+setCorrectHeights();
+wrapper.style.visibility = 'visible';
+
+// Update on resize
+window.addEventListener('resize', setCorrectHeights);
 document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
         fetchAdsIfStale(); // Re-render to ensure data is up-to-date when returning to the app
-        updateSW(); // Check for SW updates when app is foregrounded
+        // Check for SW updates when app is foregrounded using native API
+        navigator.serviceWorker.getRegistration().then(reg => {
+            reg?.update();
+        });
     }
 });
 
