@@ -512,6 +512,13 @@ a#ad-disclaimer:link {
     font-weight: normal;
 }
 
+.modal-comment {
+    text-align: center;
+    color: #a2add0; /* Soft purplish-blue */
+    font-size: 2cqh;
+    font-style: normal;
+}
+
 .modal-row {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Strict 50/50 Grid Split */
@@ -556,7 +563,7 @@ a#ad-disclaimer:link {
 .modal-buttons {
     display: flex;
     gap: 10px;
-    margin-top: 3cqh;
+    margin-top: 1.5cqh;
     margin-bottom: 1cqh;
 }
 
