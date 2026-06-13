@@ -14,7 +14,11 @@ const updateSW = registerSW({
     const refreshBtn = document.getElementById('update-refresh-btn');
     if (banner && refreshBtn) {
       banner.style.display = 'flex';
-      refreshBtn.addEventListener('click', () => updateSW(true));
+      refreshBtn.addEventListener('click', () => {
+        // Use hard navigation instead of updateSW(true) to force full viewport recalculation
+        // This prevents container query context from being stale after reload
+        window.location.href = window.location.href;
+      });
     }
   },
   onOfflineReady() {
