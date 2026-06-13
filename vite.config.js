@@ -15,12 +15,12 @@ export default defineConfig(({ mode }) => {
           url: 'https://nethalastat.crunchcompanion.com', // Must be your live URL for correct OG tags
           title: 'Nethalastat - A Ker Nethalas Stat Tracker App',
           type: 'website',
-          image: 'https://nethalastat.crunchcompanion.com/og-image.png', // Must be absolute URL
+          image: 'https://nethalastat.crunchcompanion.com/media/nethalastat-og.png', // Must be absolute URL
           description: 'Nethalastat is a stat tracking app for the solo RPG Ker Nethalas, built with PWA technology for offline use.',
         },
         twitter: {
           card: 'summary_large_image', // Forces Discord to show a large 16:9 card
-          image: 'https://nethalastat.crunchcompanion.com/large-og-image.png',
+          image: 'https://nethalastat.crunchcompanion.com/media/nethalastat-og.png',
         }
       }),
 
