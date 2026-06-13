@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import ogPlugin from 'vite-plugin-open-graph'
+import pkg from './package.json' with { type: 'json' };
 
 export default defineConfig(({ mode }) => {
   const isProd = mode === 'production';
@@ -70,6 +71,10 @@ export default defineConfig(({ mode }) => {
           enabled: true
         }
       })
-    ]
+    ],
+
+    define: {
+      __APP_VERSION__: JSON.stringify(pkg.version) // Makes the app version available in the code as a global constant
+    }
   }
 })  

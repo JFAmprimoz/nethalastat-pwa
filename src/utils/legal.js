@@ -6,6 +6,12 @@ export function initLegal() {
     const btnLegal = document.getElementById('btn-about');
     const legalModal = document.getElementById('about-modal');
     const acceptBtn = document.getElementById('about-accept');
+    const appVersionEl = document.getElementById('app-version');
+
+    // Display app version in the about modal
+    if (appVersionEl) {
+        appVersionEl.textContent = `V ${__APP_VERSION__}`;
+    }
 
     /**
      * Open the about modal

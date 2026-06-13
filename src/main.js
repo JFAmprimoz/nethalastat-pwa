@@ -269,12 +269,13 @@ renderUI();
 // after SW-triggered reloads, preventing layout collapse on the new version
 requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-        document.getElementById('board').style.visibility = 'visible';
+        document.getElementById('device-wrapper').style.visibility = 'visible';
     });
 });
 document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
         fetchAdsIfStale(); // Re-render to ensure data is up-to-date when returning to the app
+        updateSW(); // Check for SW updates when app is foregrounded
     }
 });
 
