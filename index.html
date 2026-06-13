@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <!-- The crucial viewport tag we discussed to lock zooming and width -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nethalastat - A Ker Nethalas Stat Tracker</title>
+    <title>Nethalastat - A Ker Nethalas Stat Tracker | Digital Character Sheet</title>
+    <meta name="description" content="Nethalastat is a stat tracking app for the solo RPG Ker Nethalas, built with PWA technology for offline use.">
+
     
     <!-- Google Fonts: Metal Mania -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,8 +16,6 @@
     <!-- Modern browsers use scalable SVG favicons -->
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 
-    <!-- iOS devices look for this specific file structure for their shortcuts -->
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
     <!-- Critical CSS: Prevent layout shift and FOUC -->
     <style>
@@ -47,52 +47,6 @@
         flex-direction: column;
       }
 
-      @media (min-width: 768px) {
-        .device-wrapper {
-          height: 75vh;
-          height: 75dvh;
-          width: calc(75vh * (9 / 16));
-          border-radius: 20px;
-          box-shadow: 0 0 50px rgba(0,0,0,0.8);
-          overflow: hidden;
-        }
-      }
-
-      .app-container {
-        width: 100%;
-        margin: 0 auto;
-        padding: 0 10px;
-        height: 85cqh;
-        max-height: 85cqh;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-      }
-
-      .app-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 6cqh;
-        border-bottom: 1px solid #222;
-      }
-
-      .tracker-board {
-        display: grid;
-        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-        gap: 15px;
-        height: 79cqh;
-        padding: 1cqh 0;
-        width: 100%;
-        visibility: hidden;
-      }
-
-      .ad-placeholder {
-        height: 15cqh;
-        background-color: #1a1a1a;
-        border-top: 1px solid #222;
-      }
-
       .modal-overlay {
         position: fixed;
         top: 0;
@@ -111,8 +65,32 @@
       }
     </style>
   <script defer src="https://p01--umami-service--2n67h6mhh522.code.run/script.js" data-website-id="f76c40ad-8243-44b5-b4f1-efb492ab8175"></script>
-  <script type="module" crossorigin src="/assets/index-LWRmnSjI.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-5VRD9j36.css">
+  
+      <!-- iOS devices look for these 26 non transparent pngs instead of one SVG because apple -->
+  <link rel="apple-touch-icon" sizes="40x40" href="./media/ios/16.png">
+  <link rel="apple-touch-icon" sizes="58x58" href="./media/ios/58.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="./media/ios/60.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="./media/ios/76.png">
+  <link rel="apple-touch-icon" sizes="80x80" href="./media/ios/80.png">
+  <link rel="apple-touch-icon" sizes="87x87" href="./media/ios/87.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="./media/ios/114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="./media/ios/120.png">
+  <link rel="apple-touch-icon" sizes="128x128" href="./media/ios/128.png">
+  <link rel="apple-touch-icon" sizes="136x136" href="./media/ios/136.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="./media/ios/152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="./media/ios/167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./media/ios/180.png">
+  <link rel="apple-touch-icon" sizes="192×192" href="./media/ios/192.png">
+  <link rel="apple-touch-icon" sizes="1024×1024" href="./media/ios/1024.png">
+  <script type="module" crossorigin src="/assets/index-CzSm0xVx.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BUVN-6JN.css">
+  <meta property="og:url" content="https://nethalastat.crunchcompanion.com">
+  <meta property="og:title" content="Nethalastat - A Ker Nethalas Stat Tracker App">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://nethalastat.crunchcompanion.com/media/nethalastat-og.png">
+  <meta property="og:description" content="Nethalastat is a stat tracking app for the solo RPG Ker Nethalas, built with PWA technology for offline use.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://nethalastat.crunchcompanion.com/media/nethalastat-og.png">
 <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:inline-sw">if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/sw.js', { scope: '/' })})}</script></head>
 
 <body>
@@ -199,6 +177,8 @@
         <div id="modal-current-container">
           <!-- Current value and customizable name inputs generated here -->
         </div>
+
+        <p class="modal-comment">Long press a number on the main view to return to this view with that field selected.</p>
 
         <div class="modal-buttons">
           <!-- UPDATED: Title Case buttons -->
