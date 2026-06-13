@@ -37,6 +37,7 @@ export default defineConfig(({ mode }) => {
           description: 'A stat tracking app for the solo RPG Ker Nethalas, built with PWA technology for offline use.',
           short_name: 'Nethalastat',
           theme_color: '#000000',
+          orientation: 'portrait',
           
           icons: [
             {
