@@ -197,11 +197,17 @@ document.getElementById('board').addEventListener('click', (e) => {
 
 // --- 4b. Long-press delegation for values ---
 let longPressTimer = null;
-const LONG_PRESS_DURATION = 1000;
+let longPressStartX = 0;
+let longPressStartY = 0;
+const LONG_PRESS_DURATION = 400; // Reduced to fire before Android OS context menu at ~500ms
+const LONG_PRESS_MOVE_THRESHOLD = 10; // pixels
 
 document.getElementById('board').addEventListener('pointerdown', (e) => {
     const valueEl = e.target.closest('.current-value, .xp-current');
     if (!valueEl) return;
+
+    longPressStartX = e.clientX;
+    longPressStartY = e.clientY;
 
     longPressTimer = setTimeout(() => {
         modalControls.openModal(false);
@@ -238,8 +244,14 @@ document.getElementById('board').addEventListener('pointercancel', () => {
     clearTimeout(longPressTimer);
 });
 
-document.getElementById('board').addEventListener('pointermove', () => {
-    clearTimeout(longPressTimer);
+document.getElementById('board').addEventListener('pointermove', (e) => {
+    // Only cancel long press if pointer has moved more than threshold
+    const dx = e.clientX - longPressStartX;
+    const dy = e.clientY - longPressStartY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    if (distance > LONG_PRESS_MOVE_THRESHOLD) {
+        clearTimeout(longPressTimer);
+    }
 });
 
 // --- 5. Conditions & Flyout Logic ---
