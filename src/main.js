@@ -7,6 +7,7 @@ import { initConditions } from './utils/conditions.js'
 import { initLegal } from './utils/legal.js'
 import { initBackupModal } from './utils/backup-modal.js'
 import { initializeAdEngine, fetchAdsFromServer, fetchAdsIfStale } from './utils/ad-functions.js'
+import { initBrowserBanner } from './utils/browserDetect.js'
 
 const updateSW = registerSW({
   onNeedRefresh() {
@@ -275,6 +276,9 @@ const hasAcceptedAbout = localStorage.getItem('aboutAccepted') === 'true';
 
 // Initialize the app on load
 renderUI();
+
+// Initialize browser compatibility banner (shows warning for in-app browsers)
+initBrowserBanner();
 
 // Set wrapper height from window.innerHeight to work around Android PWA viewport unit bug
 // location.reload() in PWA WebView doesn't reset dvh/vh calculations

@@ -624,3 +624,128 @@ a#ad-disclaimer:link {
 .update-btn:hover {
     background-color: #a82e2e;
 }
+
+/* --- Browser Banner Styling --- */
+.browser-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: linear-gradient(135deg, #f5d87a 0%, #f0cf5c 100%);
+    border: 2px solid #c8960c;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    margin: 12px;
+    z-index: 1500;
+    font-family: inherit;
+    display: none;
+}
+
+.browser-banner-content {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.browser-banner-icon {
+    flex-shrink: 0;
+    padding-top: 4px;
+}
+
+.browser-banner-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #333;
+}
+
+.browser-banner-message {
+    flex: 1;
+    color: #222;
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.browser-banner-message strong {
+    font-weight: 600;
+}
+
+.browser-banner-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.browser-banner-btn {
+    padding: 10px 20px;
+    border: 2px solid #c8960c;
+    border-radius: 20px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.browser-banner-btn-primary {
+    background-color: #f5d87a;
+    color: #333;
+    border-color: #c8960c;
+}
+
+.browser-banner-btn-primary:hover {
+    background-color: #ede056;
+    box-shadow: 0 2px 8px rgba(200, 150, 12, 0.3);
+}
+
+.browser-banner-btn-primary:active {
+    background-color: #e8c73e;
+}
+
+.browser-banner-btn-dismiss {
+    background-color: transparent;
+    color: #666;
+    border-color: #c8960c;
+}
+
+.browser-banner-btn-dismiss:hover {
+    background-color: rgba(245, 216, 122, 0.2);
+    color: #333;
+}
+
+.browser-banner-btn-dismiss:active {
+    background-color: rgba(245, 216, 122, 0.4);
+}
+
+/* --- Responsive adjustments for smaller screens --- */
+@media (max-width: 600px) {
+    .browser-banner {
+        margin: 8px;
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .browser-banner-content {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .browser-banner-message {
+        font-size: 14px;
+    }
+
+    .browser-banner-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .browser-banner-btn {
+        flex: 1;
+        min-width: 120px;
+    }
+}
