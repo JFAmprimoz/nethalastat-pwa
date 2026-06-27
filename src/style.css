@@ -627,26 +627,28 @@ a#ad-disclaimer:link {
 
 /* --- Browser Banner Styling --- */
 .browser-banner {
-    position: fixed;
+    position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
+    left: 12px;
+    right: 12px;
     background: linear-gradient(135deg, #f5d87a 0%, #f0cf5c 100%);
     border: 2px solid #c8960c;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     padding: 16px;
-    margin: 12px;
     z-index: 1500;
     font-family: inherit;
     display: none;
-}
-
-.browser-banner-content {
-    display: flex;
+    flex-direction: row;
     gap: 16px;
     align-items: flex-start;
+}
+
+.browser-banner-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
 }
 
 .browser-banner-icon {

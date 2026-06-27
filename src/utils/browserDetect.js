@@ -1,57 +1,60 @@
-export function getInAppBrowserName() {
-  const ua = navigator.userAgent;
-  if (/Reddit/.test(ua))                      return 'Reddit';
-  if (/Discord/.test(ua))                     return 'Discord';
-  if (/FBAN|FBAV|FB_IAB/.test(ua))            return 'Facebook';
-  if (/Instagram/.test(ua))                   return 'Instagram';
-  if (/Twitter/.test(ua))                     return 'Twitter';
-  if (/Line\//.test(ua))                      return 'Line';
+/**
+ * Returns the recommended browser string if the current browser is inappropriate,
+ * or null if no banner should be shown.
+ */
+function getRecommendedBrowser() {
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+  // Already installed as PWA — no banner needed
+  const isStandalone =
+    window.matchMedia('(display-mode: standalone)').matches ||
+    navigator.standalone;
+  if (isStandalone) return null;
+
+  const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+
+  if (isIOS) {
+    // On iOS, only Safari can install PWAs.
+    // Any other browser (Chrome iOS, Facebook, Instagram, Reddit, etc.) should prompt.
+    const isSafari =
+      /Safari/.test(ua) && !/CriOS|FxiOS|OPiOS|mercury/.test(ua);
+    if (!isSafari) return 'Safari';
+    return null;
+  }
+
+  // Android: detect WebView / in-app browsers
+  const isAndroidWebView =
+    /wv/.test(ua) || /FBAN|FBAV|Instagram/.test(ua);
+  if (isAndroidWebView) return 'Chrome';
+
+  // No service worker support at all
+  if (!('serviceWorker' in navigator)) return 'Chrome or Safari';
+
   return null;
 }
 
-export function isInAppBrowser() {
-  return getInAppBrowserName() !== null;
-}
-
 /**
- * Initialize browser banner to warn users in in-app browsers
- * Shows appropriate message and provides "Open in browser" and "Dismiss" options
+ * Initialize the browser compatibility banner.
+ * Uses localStorage so the dismissal persists across sessions.
  */
 export function initBrowserBanner() {
-  // Check if already dismissed in this session
-  if (sessionStorage.getItem('browserBannerDismissed') === 'true') {
-    return;
-  }
+  if (localStorage.getItem('hideBrowserWarning') === 'true') return;
 
-  const inAppBrowserName = getInAppBrowserName();
-  if (!inAppBrowserName) {
-    // Not in an in-app browser, don't show banner
-    return;
-  }
+  const recommended = getRecommendedBrowser();
+  if (!recommended) return;
 
   const banner = document.getElementById('browser-banner');
-  if (!banner) {
-    console.warn('browser-banner element not found in DOM');
-    return;
-  }
+  if (!banner) return;
 
-  // Determine which message to show
-  let messageHTML = '';
-  if (inAppBrowserName === 'Reddit' || inAppBrowserName === 'Discord') {
-    messageHTML = `You're viewing this in <strong>${inAppBrowserName}'s browser</strong>. For the full experience, open Nethalastat in Chrome or Safari.`;
-  } else {
-    messageHTML = 'For the best experience — including offline use — open this app in <strong>Chrome or Safari</strong>.';
-  }
-
-  // Build banner HTML
   banner.innerHTML = `
-    <div class="browser-banner-content">
-      <div class="browser-banner-icon">
-        <input type="checkbox" disabled class="browser-banner-checkbox">
-      </div>
-      <div class="browser-banner-message">
-        ${messageHTML}
-      </div>
+    <div class="browser-banner-icon">
+      <input type="checkbox" disabled class="browser-banner-checkbox">
+    </div>
+    <div class="browser-banner-body">
+      <p class="browser-banner-message">
+        For the best experience &mdash; including offline use &mdash;
+        open this app in <strong>${recommended}</strong>.
+      </p>
       <div class="browser-banner-actions">
         <button class="browser-banner-btn browser-banner-btn-primary" id="browser-banner-open">Open in browser</button>
         <button class="browser-banner-btn browser-banner-btn-dismiss" id="browser-banner-dismiss">Dismiss</button>
@@ -59,20 +62,16 @@ export function initBrowserBanner() {
     </div>
   `;
 
-  // Make banner visible
   banner.style.display = 'flex';
 
-  // Open in browser button handler
   document.getElementById('browser-banner-open').addEventListener('click', () => {
     window.open(window.location.href, '_blank');
   });
 
-  // Dismiss button handler
   document.getElementById('browser-banner-dismiss').addEventListener('click', () => {
     banner.style.display = 'none';
-    sessionStorage.setItem('browserBannerDismissed', 'true');
+    localStorage.setItem('hideBrowserWarning', 'true');
   });
 
-  // Track with analytics if available
-  window.umami?.track('browser-banner-shown', { browser: inAppBrowserName });
+  window.umami?.track('browser-banner-shown', { recommended });
 }
