@@ -22,10 +22,22 @@ function getRecommendedBrowser() {
     return null;
   }
 
-  // Android: detect WebView / in-app browsers
-  const isAndroidWebView =
-    /wv/.test(ua) || /FBAN|FBAV|Instagram/.test(ua);
-  if (isAndroidWebView) return 'Chrome';
+  // Android: allowlist known-good browsers (mirrors iOS approach).
+  // Real Chrome omits "Version/X.X" before "Chrome/" — Android WebView always adds it.
+  const isAndroid = /Android/.test(ua);
+  if (isAndroid) {
+    const isRealChrome = /Chrome\//.test(ua) && !/Version\/\d/.test(ua);
+    const isSamsungBrowser = /SamsungBrowser\//.test(ua);
+    const isFirefox = /Firefox\//.test(ua);
+    const isEdge = /EdgA\//.test(ua);
+    if (!isRealChrome && !isSamsungBrowser && !isFirefox && !isEdge) return 'Chrome';
+  }
+
+  // Some in-app browsers (e.g. Discord) spoof a desktop Linux UA to avoid detection.
+  // A non-mobile Chrome UA with touch support is a strong signal of a spoofed in-app browser.
+  const isMobileUA = /Android|iPhone|iPad|iPod|Mobile|Windows/.test(ua);
+  const isSpoofedMobile = !isMobileUA && /Chrome\//.test(ua) && navigator.maxTouchPoints > 1;
+  if (isSpoofedMobile) return 'Chrome';
 
   // No service worker support at all
   if (!('serviceWorker' in navigator)) return 'Chrome or Safari';
