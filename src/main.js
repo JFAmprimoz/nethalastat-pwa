@@ -8,6 +8,7 @@ import { initLegal } from './utils/legal.js'
 import { initBackupModal } from './utils/backup-modal.js'
 import { initializeAdEngine, fetchAdsFromServer, fetchAdsIfStale } from './utils/ad-functions.js'
 import { initBrowserBanner } from './utils/browserDetect.js'
+import { initHint } from './utils/hint.js'
 
 const updateSW = registerSW({
   onNeedRefresh() {
@@ -266,6 +267,12 @@ const modalControls = initModal(appData, saveState, renderUI);
 // --- 7. Legal Modal Logic ---
 // Initialize legal popup
 const aboutControls = initLegal();
+const hintControls = initHint();
+document.getElementById('btn-edit').addEventListener('click', () => hintControls.hideHint());
+document.getElementById('hint-popover').addEventListener('click', () => {
+    hintControls.hideHint();
+    modalControls.openModal(false);
+});
 
 // --- 8. Backup Modal Logic ---
 // Initialize backup modal
@@ -310,11 +317,11 @@ document.addEventListener('visibilitychange', () => {
 // If user hasn't accepted About modal, show it first
 if (!hasAcceptedAbout) {
     aboutControls.openAbout();
-    window.umami?.track('first-load')
+    window.umami?.track('first-load');
     document.getElementById('about-accept')
-    .addEventListener('click', () => modalControls.openModal(true));
+    .addEventListener('click', () => hintControls.showHint());
 } else if (isSaveEmpty) {
-    modalControls.openModal(true);
+    hintControls.showHint();
 }
 
 initializeAdEngine();
