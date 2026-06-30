@@ -60,7 +60,7 @@ export function initBrowserBanner() {
 
   banner.innerHTML = `
     <div class="browser-banner-icon">
-      <input type="checkbox" disabled class="browser-banner-checkbox">
+      <span class="browser-banner-warning">⚠</span>
     </div>
     <div class="browser-banner-body">
       <p class="browser-banner-message">

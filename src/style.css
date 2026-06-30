@@ -691,11 +691,10 @@ a#ad-disclaimer:link {
     padding-top: 4px;
 }
 
-.browser-banner-checkbox {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    accent-color: #333;
+.browser-banner-warning {
+    font-size: 20px;
+    line-height: 1;
+    color: #d63031;
 }
 
 .browser-banner-message {
