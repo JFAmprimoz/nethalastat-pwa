@@ -77,15 +77,40 @@ export async function fetchAdsFromServer() {
 
 }
 
+let rotationIntervalId = null;
+
+function startRotation() {
+    if (rotationIntervalId !== null) return;
+    rotationIntervalId = setInterval(rotateAd, 90000);
+}
+
+function stopRotation() {
+    if (rotationIntervalId === null) return;
+    clearInterval(rotationIntervalId);
+    rotationIntervalId = null;
+}
+
 export async function initializeAdEngine() {
 // Fire off a background check immediately on app boot
     await fetchAdsFromServer();
-    
+
     // Render the initial banner graphic
     rotateAd();
-    
-    // Standard 90-second visual rotation loop
-    setInterval(rotateAd, 90000);}
+
+    // Standard 90-second visual rotation loop, paused while the tab is hidden
+    if (document.visibilityState === 'visible') {
+        startRotation();
+    }
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+            rotateAd();
+            startRotation();
+        } else {
+            stopRotation();
+        }
+    });
+}
 
 function rotateAd() {
     const adContainer = document.querySelector('.ad-placeholder');
